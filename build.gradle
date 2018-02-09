@@ -1,19 +1,16 @@
 buildscript {
     ext.kotlin_version = '1.2.21'
-
-    repositories {
-        jcenter()
-        maven {
-            url "https://maven.google.com"
-        }
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
 }
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version "1.2.21"
+}
+
+group 'lt.tlistas'
+version '1.1.1'
 
 apply plugin: 'kotlin'
-
-repositories {
-    mavenCentral()
-}
+apply from: 'dependencies.gradle'
+apply from: 'publish.gradle'
+apply from: 'tasks.gradle'
+//apply from: 'jacoco.gradle'

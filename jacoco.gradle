@@ -1,0 +1,40 @@
+apply plugin: "jacoco"
+
+jacoco {
+    toolVersion "0.8.0"
+}
+
+def fileFilter = ['**/R.class', '**/R$*.class', 'org.gradle.*', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*',
+                  'android/**/*.*', '**/type/**', '**/AsyncProcess*', '**/security/**',
+                  '**/LoginnApplication*', '**/*$*.*', '**/*$*$*.*']
+def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+def mainSrc = "${project.projectDir}/src/main/kotlin"
+
+task jacocoTestReport(type: JacocoReport, dependsOn: "testDebugUnitTest") {
+    reports {
+        html.enabled = true
+    }
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = files("${buildDir}/jacoco/testDebugUnitTest.exec")
+}
+
+task jacocoTestCoverageVerification(type: JacocoCoverageVerification) {
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = files("${buildDir}/jacoco/testDebugUnitTest.exec")
+
+    violationRules {
+        rule {
+            limit {
+                element = 'BUNDLE'
+                counter = "LINE"
+                minimum = 1
+            }
+        }
+    }
+}
+
+jacocoTestCoverageVerification.dependsOn(jacocoTestReport)
+check.dependsOn(jacocoTestCoverageVerification)
