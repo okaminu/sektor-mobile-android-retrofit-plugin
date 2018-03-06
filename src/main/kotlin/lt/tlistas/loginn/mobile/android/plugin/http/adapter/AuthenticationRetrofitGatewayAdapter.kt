@@ -7,7 +7,7 @@ import lt.tlistas.loginn.mobile.android.plugin.http.service.AuthenticationRetrof
 class AuthenticationRetrofitGatewayAdapter(private val service: AuthenticationRetrofitService = RetrofitServiceFactory()
         .buildService(AuthenticationRetrofitService::class.java)) : AuthenticationGateway {
 
-    override fun registerMobileNumber(mobileNumber: String) {
+    override fun requestConfirmationCode(mobileNumber: String) {
         service.registerMobileNumber(mobileNumber).execute()
     }
 

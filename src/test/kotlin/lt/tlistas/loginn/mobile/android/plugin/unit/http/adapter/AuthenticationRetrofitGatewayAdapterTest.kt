@@ -31,7 +31,7 @@ class AuthenticationRetrofitGatewayAdapterTest {
         doReturn(callMock).`when`(authenticationRetrofitServiceMock).registerMobileNumber(eq(mobileNumber))
         doReturn(responseMock).`when`(callMock).execute()
 
-        AuthenticationRetrofitGatewayAdapter(authenticationRetrofitServiceMock).registerMobileNumber(mobileNumber)
+        AuthenticationRetrofitGatewayAdapter(authenticationRetrofitServiceMock).requestConfirmationCode(mobileNumber)
 
         verify(authenticationRetrofitServiceMock).registerMobileNumber(same(mobileNumber))
         verify(callMock).execute()
