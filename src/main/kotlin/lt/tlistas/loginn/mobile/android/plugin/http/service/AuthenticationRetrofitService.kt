@@ -6,10 +6,10 @@ import retrofit2.http.Path
 
 interface AuthenticationRetrofitService {
 
-    @POST("/mobile/register/mobileNumber/{mobileNumber}")
-    fun registerMobileNumber(@Path("mobileNumber") mobileNumber: String): Call<Void>
+    @POST("/collaborator/authentication/code/request/{mobileNumber}")
+    fun requestConfirmationCode(@Path("mobileNumber") mobileNumber: String): Call<Void>
 
-    @POST("/mobile/confirm/code/{confirmationCode}")
-    fun confirmCode(@Path("confirmationCode") confirmationCode: String): Call<String>
+    @POST("/collaborator/authentication/code/confirm/{code}")
+    fun confirmCode(@Path("code") confirmationCode: String): Call<String>
 
 }

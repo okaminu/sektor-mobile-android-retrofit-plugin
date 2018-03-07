@@ -10,7 +10,7 @@ class AuthenticationRetrofitGatewayAdapter(private val service: AuthenticationRe
         .buildService(AuthenticationRetrofitService::class.java)) : AuthenticationGateway {
 
     override fun requestConfirmationCode(mobileNumber: String) {
-        val response = service.registerMobileNumber(mobileNumber).execute()
+        val response = service.requestConfirmationCode(mobileNumber).execute()
         if (response.code() == 404)
             throw CollaboratorNotFoundException()
     }

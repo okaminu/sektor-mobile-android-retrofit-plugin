@@ -21,4 +21,3 @@ class OkHttpClientBuilder(private val propertyLoader: PropertyLoader = PropertyL
         const val TIMEOUT_PROPERTIES = "timeout.properties"
     }
 }
-

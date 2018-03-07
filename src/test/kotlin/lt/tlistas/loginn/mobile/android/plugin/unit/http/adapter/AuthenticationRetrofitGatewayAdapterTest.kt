@@ -29,26 +29,26 @@ class AuthenticationRetrofitGatewayAdapterTest {
     private lateinit var gatewayAdapter: AuthenticationRetrofitGatewayAdapter
 
     @Before
-    fun setUp(){
+    fun setUp() {
         gatewayAdapter = AuthenticationRetrofitGatewayAdapter(authenticationRetrofitServiceMock)
     }
 
     @Test
-    fun `Registers mobile number`() {
+    fun `Requests confirmation code`() {
         val mobileNumber = "+37066666666"
-        doReturn(callMock).`when`(authenticationRetrofitServiceMock).registerMobileNumber(eq(mobileNumber))
+        doReturn(callMock).`when`(authenticationRetrofitServiceMock).requestConfirmationCode(eq(mobileNumber))
         doReturn(responseMock).`when`(callMock).execute()
 
         gatewayAdapter.requestConfirmationCode(mobileNumber)
 
-        verify(authenticationRetrofitServiceMock).registerMobileNumber(same(mobileNumber))
+        verify(authenticationRetrofitServiceMock).requestConfirmationCode(same(mobileNumber))
         verify(callMock).execute()
     }
 
     @Test(expected = CollaboratorNotFoundException::class)
     fun `Throws error when Collaborator by provided mobile number is not found`() {
         val mobileNumber = "+37066666666"
-        doReturn(callMock).`when`(authenticationRetrofitServiceMock).registerMobileNumber(eq(mobileNumber))
+        doReturn(callMock).`when`(authenticationRetrofitServiceMock).requestConfirmationCode(eq(mobileNumber))
         doReturn(responseMock).`when`(callMock).execute()
         doReturn(404).`when`(responseMock).code()
 

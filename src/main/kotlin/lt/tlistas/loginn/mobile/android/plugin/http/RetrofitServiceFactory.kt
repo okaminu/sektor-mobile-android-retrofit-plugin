@@ -18,7 +18,7 @@ class RetrofitServiceFactory(private val propertyLoader: PropertyLoader = Proper
     fun <S> buildService(serviceClass: Class<S>, authToken: String): S {
         okHttpClientBuilder.interceptors().add(AuthenticationInterceptor(authToken))
 
-        return build(okHttpClientBuilder).create(serviceClass)
+        return buildService(serviceClass)
     }
 
     private fun build(okHttpClientBuilder: OkHttpClient.Builder) = builder.apply {
