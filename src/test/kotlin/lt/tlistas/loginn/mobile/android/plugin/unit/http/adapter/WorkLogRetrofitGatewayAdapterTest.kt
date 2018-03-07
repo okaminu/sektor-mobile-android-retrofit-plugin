@@ -30,12 +30,12 @@ class WorkLogRetrofitGatewayAdapterTest {
     @Test
     fun `Logs work by location using Retrofit`() {
         val locationMock = GpsCoordinates(15.0, 20.0)
-        doReturn(callMock).`when`(workLogRetrofitServiceMock).logWorkByLocation(eq(locationMock))
+        doReturn(callMock).`when`(workLogRetrofitServiceMock).logByLocation(eq(locationMock))
         doReturn(responseMock).`when`(callMock).execute()
 
-        WorkLogRetrofitGatewayAdapter("token", workLogRetrofitServiceMock).logWorkByLocation(locationMock)
+        WorkLogRetrofitGatewayAdapter("token", workLogRetrofitServiceMock).logByLocation(locationMock)
 
-        verify(workLogRetrofitServiceMock).logWorkByLocation(same(locationMock))
+        verify(workLogRetrofitServiceMock).logByLocation(same(locationMock))
         verify(callMock).execute()
     }
 }

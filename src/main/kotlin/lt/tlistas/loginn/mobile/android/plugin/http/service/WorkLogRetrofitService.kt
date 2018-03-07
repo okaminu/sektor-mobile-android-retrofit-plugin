@@ -7,7 +7,7 @@ import retrofit2.http.POST
 
 interface WorkLogRetrofitService {
 
-    @POST("/collaborator/update")
-    fun logWorkByLocation(@Body gpsCoordinates: GpsCoordinates): Call<Void>
+    @POST("/worklog/log-by-location")
+    fun logByLocation(@Body gpsCoordinates: GpsCoordinates): Call<Void>
 
 }
