@@ -4,8 +4,8 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
-import lt.tlistas.loginn.mobile.android.plugin.http.OkHttpClientFactory
 import lt.tlistas.loginn.mobile.android.plugin.PropertyLoader
+import lt.tlistas.loginn.mobile.android.plugin.http.OkHttpClientBuilder
 import okhttp3.OkHttpClient
 import org.junit.Assert.assertNotNull
 import org.junit.Test
@@ -24,20 +24,19 @@ class OkHttpClientFactoryTest {
     private lateinit var propertyLoaderMock: PropertyLoader
 
     @Test
-    fun `Builds OkHttpClient`() {
+    fun `Sets default builder parameters`() {
         val builderMock = mock<OkHttpClient.Builder>()
         val propertyMock = mock<Properties>()
         doReturn(10).`when`(propertyMock)[any()]
         doReturn(propertyMock).`when`(propertyLoaderMock).load(any())
         mockOkHttpClientBuilder(builderMock)
 
-        val client = OkHttpClientFactory(propertyLoaderMock, okHttpClientMock).client()
+        val client = OkHttpClientBuilder(propertyLoaderMock, okHttpClientMock).defaultBuilder()
 
         verify(okHttpClientMock).newBuilder()
         verify(builderMock).readTimeout(any(), any())
         verify(builderMock).writeTimeout(any(), any())
         verify(builderMock).connectTimeout(any(), any())
-        verify(builderMock).build()
         verify(propertyLoaderMock).load(any())
         assertNotNull(client)
     }
@@ -47,6 +46,5 @@ class OkHttpClientFactoryTest {
         doReturn(builderMock).`when`(builderMock).readTimeout(any(), any())
         doReturn(builderMock).`when`(builderMock).writeTimeout(any(), any())
         doReturn(builderMock).`when`(builderMock).connectTimeout(any(), any())
-        doReturn(okHttpClientMock).`when`(builderMock).build()
     }
 }

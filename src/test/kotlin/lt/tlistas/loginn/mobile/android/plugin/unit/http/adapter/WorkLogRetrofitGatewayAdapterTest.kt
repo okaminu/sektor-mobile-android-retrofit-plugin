@@ -33,7 +33,7 @@ class WorkLogRetrofitGatewayAdapterTest {
         doReturn(callMock).`when`(workLogRetrofitServiceMock).logWorkByLocation(eq(locationMock))
         doReturn(responseMock).`when`(callMock).execute()
 
-        WorkLogRetrofitGatewayAdapter(workLogRetrofitServiceMock).logWorkByLocation(locationMock)
+        WorkLogRetrofitGatewayAdapter("token", workLogRetrofitServiceMock).logWorkByLocation(locationMock)
 
         verify(workLogRetrofitServiceMock).logWorkByLocation(same(locationMock))
         verify(callMock).execute()

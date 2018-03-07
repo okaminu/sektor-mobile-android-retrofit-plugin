@@ -23,7 +23,7 @@ class WorkTimeRetrofitGatewayAdapterTest {
 
     @Test
     fun `Gets work time`() {
-        val workTimeRetrofitGatewayAdapter = WorkTimeRetrofitGatewayAdapter(workTimeRetrofitServiceMock)
+        val workTimeRetrofitGatewayAdapter = WorkTimeRetrofitGatewayAdapter("token", workTimeRetrofitServiceMock)
         val workTimeMock = WorkTime()
         val responseMock = Response.success(WorkTime())
         doReturn(callMock).`when`(workTimeRetrofitServiceMock).getWorkTime()
