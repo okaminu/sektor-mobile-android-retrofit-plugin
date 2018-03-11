@@ -1,10 +1,7 @@
-package lt.tlistas.loginn.mobile.android.plugin.unit.http.interceptor
+package lt.tlistas.loginn.mobile.android.plugin.unit.web.interceptor
 
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
-import lt.tlistas.loginn.mobile.android.plugin.http.interceptor.AuthenticationInterceptor
+import com.nhaarman.mockito_kotlin.*
+import lt.tlistas.loginn.mobile.android.plugin.web.interceptor.AuthenticationInterceptor
 import okhttp3.Interceptor.Chain
 import okhttp3.Request
 import okhttp3.Request.Builder
@@ -30,7 +27,7 @@ class AuthenticationInterceptorTest {
         assertNotNull(response)
         verify(chainMock).request()
         verify(chainRequestMock).newBuilder()
-        verify(okHttpBuilderMock).header(any(), any())
+        verify(okHttpBuilderMock).header(any(), eq("token"))
         verify(okHttpBuilderMock).build()
         verify(chainMock).proceed(any())
     }

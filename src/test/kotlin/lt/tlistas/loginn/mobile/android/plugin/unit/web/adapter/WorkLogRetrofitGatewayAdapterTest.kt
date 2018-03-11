@@ -1,12 +1,12 @@
-package lt.tlistas.loginn.mobile.unit.http.adapter
+package lt.tlistas.loginn.mobile.android.plugin.unit.web.adapter
 
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.same
 import com.nhaarman.mockito_kotlin.verify
 import lt.tlistas.loginn.mobile.android.api.type.valueobject.GpsCoordinates
-import lt.tlistas.loginn.mobile.android.plugin.http.adapter.WorkLogRetrofitGatewayAdapter
-import lt.tlistas.loginn.mobile.android.plugin.http.service.WorkLogRetrofitService
+import lt.tlistas.loginn.mobile.android.plugin.web.adapter.WorkLogRetrofitGatewayAdapter
+import lt.tlistas.loginn.mobile.android.plugin.web.service.WorkLogRetrofitService
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock

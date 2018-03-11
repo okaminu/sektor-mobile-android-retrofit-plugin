@@ -1,4 +1,4 @@
-package lt.tlistas.loginn.mobile.android.plugin.http.service
+package lt.tlistas.loginn.mobile.android.plugin.web.service
 
 import lt.tlistas.loginn.mobile.android.api.type.valueobject.GpsCoordinates
 import retrofit2.Call

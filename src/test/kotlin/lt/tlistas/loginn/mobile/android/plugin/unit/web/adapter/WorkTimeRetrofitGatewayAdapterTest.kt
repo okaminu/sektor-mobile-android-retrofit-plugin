@@ -1,9 +1,9 @@
-package lt.tlistas.loginn.mobile.unit.http.adapter
+package lt.tlistas.loginn.mobile.android.plugin.unit.web.adapter
 
 import com.nhaarman.mockito_kotlin.doReturn
 import lt.tlistas.loginn.mobile.android.api.type.valueobject.WorkTime
-import lt.tlistas.loginn.mobile.android.plugin.http.adapter.WorkTimeRetrofitGatewayAdapter
-import lt.tlistas.loginn.mobile.android.plugin.http.service.WorkTimeRetrofitService
+import lt.tlistas.loginn.mobile.android.plugin.web.adapter.WorkTimeRetrofitGatewayAdapter
+import lt.tlistas.loginn.mobile.android.plugin.web.service.WorkTimeRetrofitService
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith

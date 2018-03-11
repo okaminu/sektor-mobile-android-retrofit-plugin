@@ -1,4 +1,4 @@
-package lt.tlistas.loginn.mobile.android.plugin.unit.http.adapter
+package lt.tlistas.loginn.mobile.android.plugin.unit.web.adapter
 
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.eq
@@ -6,8 +6,8 @@ import com.nhaarman.mockito_kotlin.same
 import com.nhaarman.mockito_kotlin.verify
 import lt.tlistas.loginn.backend.exception.AuthenticationException
 import lt.tlistas.loginn.backend.exception.CollaboratorNotFoundException
-import lt.tlistas.loginn.mobile.android.plugin.http.adapter.AuthenticationRetrofitGatewayAdapter
-import lt.tlistas.loginn.mobile.android.plugin.http.service.AuthenticationRetrofitService
+import lt.tlistas.loginn.mobile.android.plugin.web.adapter.AuthenticationRetrofitGatewayAdapter
+import lt.tlistas.loginn.mobile.android.plugin.web.service.AuthenticationRetrofitService
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test

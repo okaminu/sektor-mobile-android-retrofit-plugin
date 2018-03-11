@@ -1,13 +1,13 @@
-package lt.tlistas.loginn.mobile.android.plugin.http.adapter
+package lt.tlistas.loginn.mobile.android.plugin.web.adapter
 
 import lt.tlistas.loginn.backend.exception.AuthenticationException
 import lt.tlistas.loginn.backend.exception.CollaboratorNotFoundException
 import lt.tlistas.loginn.mobile.android.api.gateway.AuthenticationGateway
-import lt.tlistas.loginn.mobile.android.plugin.http.RetrofitServiceFactory
-import lt.tlistas.loginn.mobile.android.plugin.http.service.AuthenticationRetrofitService
+import lt.tlistas.loginn.mobile.android.plugin.web.factory.RetrofitFactory
+import lt.tlistas.loginn.mobile.android.plugin.web.service.AuthenticationRetrofitService
 
-class AuthenticationRetrofitGatewayAdapter(private val service: AuthenticationRetrofitService = RetrofitServiceFactory()
-        .buildService(AuthenticationRetrofitService::class.java)) : AuthenticationGateway {
+class AuthenticationRetrofitGatewayAdapter(private val service: AuthenticationRetrofitService = RetrofitFactory()
+        .create(AuthenticationRetrofitService::class.java)) : AuthenticationGateway {
 
     override fun requestConfirmationCode(mobileNumber: String) {
         val response = service.requestConfirmationCode(mobileNumber).execute()

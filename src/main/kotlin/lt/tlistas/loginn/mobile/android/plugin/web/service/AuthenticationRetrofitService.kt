@@ -1,4 +1,4 @@
-package lt.tlistas.loginn.mobile.android.plugin.http.service
+package lt.tlistas.loginn.mobile.android.plugin.web.service
 
 import retrofit2.Call
 import retrofit2.http.POST
