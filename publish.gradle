@@ -4,8 +4,8 @@ apply from: 'aws-credentials.gradle'
 publishing {
     publications {
         mavenJava(MavenPublication) { publication ->
-            groupId 'lt.tlistas.loginn'
-            artifactId = 'mobile-android-retrofit-plugin'
+            groupId 'lt.tlistas.loginn.mobile'
+            artifactId = 'android-retrofit-plugin'
             version '1.1.1'
             from components.java
 
