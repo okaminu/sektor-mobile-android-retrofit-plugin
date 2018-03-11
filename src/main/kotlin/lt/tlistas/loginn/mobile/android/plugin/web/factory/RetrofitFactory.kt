@@ -13,7 +13,7 @@ class RetrofitFactory(private val propertyLoader: PropertyLoader = PropertyLoade
                       private val builder: Builder = Builder(),
                       private val okHttpClient: OkHttpClient = OkHttpClient()) {
 
-    private val defaultHttpClientBuilder: OkHttpClient.Builder = defaultBuilder()
+    private val defaultHttpClientBuilder: OkHttpClient.Builder = defaultOkHttpClientBuilder()
 
     fun <S> create(serviceClass: Class<S>): S {
         return build(defaultHttpClientBuilder).create(serviceClass)
@@ -31,7 +31,7 @@ class RetrofitFactory(private val propertyLoader: PropertyLoader = PropertyLoade
         addConverterFactory(GsonConverterFactory.create((GsonBuilder().setLenient().create())))
     }.build()
 
-    private fun defaultBuilder() = okHttpClient.newBuilder().apply {
+    private fun defaultOkHttpClientBuilder() = okHttpClient.newBuilder().apply {
         val prop = propertyLoader.load(TIMEOUT_PROPERTIES)
         readTimeout(getValue(prop, "READ_TIMEOUT"), SECONDS)
         writeTimeout(getValue(prop, "WRITE_TIMEOUT"), SECONDS)
