@@ -4,10 +4,10 @@ import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.same
 import com.nhaarman.mockito_kotlin.verify
-import lt.tlistas.loginn.backend.exception.AuthenticationException
-import lt.tlistas.loginn.backend.exception.CollaboratorNotFoundException
+import lt.tlistas.loginn.mobile.android.api.exception.AuthenticationException
+import lt.tlistas.loginn.mobile.android.api.exception.CollaboratorNotFoundException
 import lt.tlistas.loginn.mobile.android.plugin.web.adapter.AuthenticationRetrofitGatewayAdapter
-import lt.tlistas.loginn.mobile.android.plugin.web.service.AuthenticationRetrofitService
+import lt.tlistas.loginn.mobile.android.plugin.web.service.IdentityConfirmationRetrofitService
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
@@ -20,7 +20,7 @@ import retrofit2.Response
 @RunWith(MockitoJUnitRunner::class)
 class AuthenticationRetrofitGatewayAdapterTest {
 
-    @Mock private lateinit var authenticationRetrofitServiceMock: AuthenticationRetrofitService
+    @Mock private lateinit var identityConfirmationServiceMock: IdentityConfirmationRetrofitService
 
     @Mock private lateinit var callMock: Call<Void>
 
@@ -30,49 +30,49 @@ class AuthenticationRetrofitGatewayAdapterTest {
 
     @Before
     fun setUp() {
-        gatewayAdapter = AuthenticationRetrofitGatewayAdapter(authenticationRetrofitServiceMock)
+        gatewayAdapter = AuthenticationRetrofitGatewayAdapter(identityConfirmationServiceMock)
     }
 
     @Test
     fun `Requests confirmation code`() {
         val mobileNumber = "+37066666666"
-        doReturn(callMock).`when`(authenticationRetrofitServiceMock).requestConfirmationCode(eq(mobileNumber))
+        doReturn(callMock).`when`(identityConfirmationServiceMock).requestCode(eq(mobileNumber))
         doReturn(responseMock).`when`(callMock).execute()
 
-        gatewayAdapter.requestConfirmationCode(mobileNumber)
+        gatewayAdapter.requestCode(mobileNumber)
 
-        verify(authenticationRetrofitServiceMock).requestConfirmationCode(same(mobileNumber))
+        verify(identityConfirmationServiceMock).requestCode(same(mobileNumber))
         verify(callMock).execute()
     }
 
     @Test(expected = CollaboratorNotFoundException::class)
     fun `Throws error when Collaborator by provided mobile number is not found`() {
         val mobileNumber = "+37066666666"
-        doReturn(callMock).`when`(authenticationRetrofitServiceMock).requestConfirmationCode(eq(mobileNumber))
+        doReturn(callMock).`when`(identityConfirmationServiceMock).requestCode(eq(mobileNumber))
         doReturn(responseMock).`when`(callMock).execute()
         doReturn(404).`when`(responseMock).code()
 
-        gatewayAdapter.requestConfirmationCode(mobileNumber)
+        gatewayAdapter.requestCode(mobileNumber)
     }
 
     @Test
     fun `Confirms received code`() {
         val confirmationCode = "123456"
-        doReturn(callMock).`when`(authenticationRetrofitServiceMock).confirmCode(eq(confirmationCode))
+        doReturn(callMock).`when`(identityConfirmationServiceMock).confirmCode(eq(confirmationCode))
         doReturn(responseMock).`when`(callMock).execute()
         doReturn("token").`when`(responseMock).body()
 
         val token = gatewayAdapter.confirmCode(confirmationCode)
 
         assertNotNull(token)
-        verify(authenticationRetrofitServiceMock).confirmCode(same(confirmationCode))
+        verify(identityConfirmationServiceMock).confirmCode(same(confirmationCode))
         verify(callMock).execute()
     }
 
     @Test(expected = AuthenticationException::class)
     fun `Throws error when confirmation code is incorrect`() {
         val confirmationCode = "123456"
-        doReturn(callMock).`when`(authenticationRetrofitServiceMock).confirmCode(eq(confirmationCode))
+        doReturn(callMock).`when`(identityConfirmationServiceMock).confirmCode(eq(confirmationCode))
         doReturn(responseMock).`when`(callMock).execute()
         doReturn(404).`when`(responseMock).code()
 

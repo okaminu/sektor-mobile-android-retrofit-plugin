@@ -1,16 +1,16 @@
 package lt.tlistas.loginn.mobile.android.plugin.web.adapter
 
-import lt.tlistas.loginn.backend.exception.AuthenticationException
-import lt.tlistas.loginn.backend.exception.CollaboratorNotFoundException
-import lt.tlistas.loginn.mobile.android.api.gateway.AuthenticationGateway
+import lt.tlistas.loginn.mobile.android.api.exception.AuthenticationException
+import lt.tlistas.loginn.mobile.android.api.exception.CollaboratorNotFoundException
+import lt.tlistas.loginn.mobile.android.api.gateway.IdentityConfirmationGateway
 import lt.tlistas.loginn.mobile.android.plugin.web.factory.RetrofitFactory
-import lt.tlistas.loginn.mobile.android.plugin.web.service.AuthenticationRetrofitService
+import lt.tlistas.loginn.mobile.android.plugin.web.service.IdentityConfirmationRetrofitService
 
-class AuthenticationRetrofitGatewayAdapter(private val service: AuthenticationRetrofitService = RetrofitFactory()
-        .create(AuthenticationRetrofitService::class.java)) : AuthenticationGateway {
+class AuthenticationRetrofitGatewayAdapter(private val service: IdentityConfirmationRetrofitService = RetrofitFactory()
+        .create(IdentityConfirmationRetrofitService::class.java)) : IdentityConfirmationGateway {
 
-    override fun requestConfirmationCode(mobileNumber: String) {
-        val response = service.requestConfirmationCode(mobileNumber).execute()
+    override fun requestCode(mobileNumber: String) {
+        val response = service.requestCode(mobileNumber).execute()
         if (response.code() == 404)
             throw CollaboratorNotFoundException()
     }
