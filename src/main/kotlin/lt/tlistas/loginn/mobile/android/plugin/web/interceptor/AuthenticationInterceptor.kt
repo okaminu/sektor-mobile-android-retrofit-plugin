@@ -9,9 +9,9 @@ class AuthenticationInterceptor(private val authToken: String) : Interceptor {
 
     override fun intercept(chain: Chain): Response {
         val request = chain.request()
-                .newBuilder()
-                .header("auth-token", authToken)
-                .build()
+            .newBuilder()
+            .header("auth-token", authToken)
+            .build()
 
         return chain.proceed(request)
     }

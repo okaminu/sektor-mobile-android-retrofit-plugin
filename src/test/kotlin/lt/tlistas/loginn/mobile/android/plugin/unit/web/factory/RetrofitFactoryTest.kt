@@ -20,17 +20,13 @@ import java.util.*
 @RunWith(MockitoJUnitRunner::class)
 class RetrofitFactoryTest {
 
-    @Mock
-    private lateinit var retrofitBuilderMock: Builder
+    @Mock private lateinit var retrofitBuilderMock: Builder
 
-    @Mock
-    private lateinit var propertyLoaderMock: PropertyLoader
+    @Mock private lateinit var propertyLoaderMock: PropertyLoader
 
-    @Mock
-    private lateinit var okHttpClientMock: OkHttpClient
+    @Mock private lateinit var okHttpClientMock: OkHttpClient
 
-    @Mock
-    private lateinit var okHttpBuilderMock: OkHttpClient.Builder
+    @Mock private lateinit var okHttpBuilderMock: OkHttpClient.Builder
 
     private lateinit var retrofitFactory: RetrofitFactory
 

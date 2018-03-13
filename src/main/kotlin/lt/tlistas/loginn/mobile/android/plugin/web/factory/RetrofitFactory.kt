@@ -9,9 +9,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 import java.util.concurrent.TimeUnit.SECONDS
 
-class RetrofitFactory(private val propertyLoader: PropertyLoader = PropertyLoader(),
-                      private val builder: Builder = Builder(),
-                      private val okHttpClient: OkHttpClient = OkHttpClient()) {
+class RetrofitFactory(
+    private val propertyLoader: PropertyLoader = PropertyLoader(),
+    private val builder: Builder = Builder(),
+    private val okHttpClient: OkHttpClient = OkHttpClient()
+) {
 
     private val defaultHttpClientBuilder = defaultOkHttpClientBuilder()
 
