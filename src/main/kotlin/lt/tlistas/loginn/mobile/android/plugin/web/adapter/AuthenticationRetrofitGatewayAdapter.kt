@@ -1,7 +1,7 @@
 package lt.tlistas.loginn.mobile.android.plugin.web.adapter
 
-import lt.tlistas.loginn.mobile.android.api.exception.AuthenticationException
 import lt.tlistas.loginn.mobile.android.api.exception.CollaboratorNotFoundException
+import lt.tlistas.loginn.mobile.android.api.exception.IncorrectConfirmationCodeException
 import lt.tlistas.loginn.mobile.android.api.gateway.IdentityConfirmationGateway
 import lt.tlistas.loginn.mobile.android.plugin.web.factory.RetrofitFactory
 import lt.tlistas.loginn.mobile.android.plugin.web.service.IdentityConfirmationRetrofitService
@@ -18,7 +18,7 @@ class AuthenticationRetrofitGatewayAdapter(private val service: IdentityConfirma
     override fun confirmCode(confirmationCode: String): String {
         val response = service.confirmCode(confirmationCode).execute()
         if (response.code() == 404)
-            throw AuthenticationException()
+            throw IncorrectConfirmationCodeException()
         return response.body()
     }
 

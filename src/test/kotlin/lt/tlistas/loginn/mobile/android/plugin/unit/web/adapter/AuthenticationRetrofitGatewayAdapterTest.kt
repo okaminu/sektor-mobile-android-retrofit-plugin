@@ -4,8 +4,8 @@ import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.same
 import com.nhaarman.mockito_kotlin.verify
-import lt.tlistas.loginn.mobile.android.api.exception.AuthenticationException
 import lt.tlistas.loginn.mobile.android.api.exception.CollaboratorNotFoundException
+import lt.tlistas.loginn.mobile.android.api.exception.IncorrectConfirmationCodeException
 import lt.tlistas.loginn.mobile.android.plugin.web.adapter.AuthenticationRetrofitGatewayAdapter
 import lt.tlistas.loginn.mobile.android.plugin.web.service.IdentityConfirmationRetrofitService
 import org.junit.Assert.assertNotNull
@@ -69,7 +69,7 @@ class AuthenticationRetrofitGatewayAdapterTest {
         verify(callMock).execute()
     }
 
-    @Test(expected = AuthenticationException::class)
+    @Test(expected = IncorrectConfirmationCodeException::class)
     fun `Throws error when confirmation code is incorrect`() {
         val confirmationCode = "123456"
         doReturn(callMock).`when`(identityConfirmationServiceMock).confirmCode(eq(confirmationCode))
