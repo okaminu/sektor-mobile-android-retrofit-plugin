@@ -13,7 +13,7 @@ class RetrofitFactory(private val propertyLoader: PropertyLoader = PropertyLoade
                       private val builder: Builder = Builder(),
                       private val okHttpClient: OkHttpClient = OkHttpClient()) {
 
-    private val defaultHttpClientBuilder: OkHttpClient.Builder = defaultOkHttpClientBuilder()
+    private val defaultHttpClientBuilder = defaultOkHttpClientBuilder()
 
     fun <S> create(serviceClass: Class<S>): S {
         return build(defaultHttpClientBuilder).create(serviceClass)
