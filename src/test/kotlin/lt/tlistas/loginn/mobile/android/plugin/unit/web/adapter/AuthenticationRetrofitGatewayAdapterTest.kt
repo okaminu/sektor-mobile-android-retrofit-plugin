@@ -10,7 +10,9 @@ import lt.tlistas.loginn.mobile.android.plugin.web.adapter.AuthenticationRetrofi
 import lt.tlistas.loginn.mobile.android.plugin.web.service.IdentityConfirmationRetrofitService
 import org.junit.Assert.assertNotNull
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.ExpectedException
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
@@ -25,6 +27,10 @@ class AuthenticationRetrofitGatewayAdapterTest {
     @Mock private lateinit var callMock: Call<Void>
 
     @Mock private lateinit var responseMock: Response<Void>
+
+    @Rule
+    @JvmField
+    val expectedException = ExpectedException.none()!!
 
     private lateinit var gatewayAdapter: AuthenticationRetrofitGatewayAdapter
 
@@ -45,9 +51,10 @@ class AuthenticationRetrofitGatewayAdapterTest {
         verify(callMock).execute()
     }
 
-    @Test(expected = CollaboratorNotFoundException::class)
+    @Test
     fun `Throws error when Collaborator by provided mobile number is not found`() {
         val mobileNumber = "+37066666666"
+        expectedException.expect(CollaboratorNotFoundException::class.java)
         doReturn(callMock).`when`(identityConfirmationServiceMock).requestCode(eq(mobileNumber))
         doReturn(responseMock).`when`(callMock).execute()
         doReturn(404).`when`(responseMock).code()
@@ -69,12 +76,13 @@ class AuthenticationRetrofitGatewayAdapterTest {
         verify(callMock).execute()
     }
 
-    @Test(expected = IncorrectConfirmationCodeException::class)
+    @Test
     fun `Throws error when confirmation code is incorrect`() {
         val confirmationCode = "123456"
+        expectedException.expect(IncorrectConfirmationCodeException::class.java)
         doReturn(callMock).`when`(identityConfirmationServiceMock).confirmCode(eq(confirmationCode))
         doReturn(responseMock).`when`(callMock).execute()
-        doReturn(404).`when`(responseMock).code()
+        doReturn(401).`when`(responseMock).code()
 
         gatewayAdapter.confirmCode(confirmationCode)
     }

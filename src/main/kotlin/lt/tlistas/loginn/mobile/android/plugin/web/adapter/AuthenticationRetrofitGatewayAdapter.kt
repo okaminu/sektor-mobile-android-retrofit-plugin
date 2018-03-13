@@ -19,7 +19,7 @@ class AuthenticationRetrofitGatewayAdapter(
 
     override fun confirmCode(confirmationCode: String): String {
         val response = service.confirmCode(confirmationCode).execute()
-        if (response.code() == 404)
+        if (response.code() == 401)
             throw IncorrectConfirmationCodeException()
         return response.body()
     }
