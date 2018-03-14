@@ -6,7 +6,7 @@ import com.nhaarman.mockito_kotlin.same
 import com.nhaarman.mockito_kotlin.verify
 import lt.tlistas.loginn.mobile.android.api.type.valueobject.GpsCoordinates
 import lt.tlistas.loginn.mobile.android.plugin.web.adapter.WorkLogRetrofitGatewayAdapter
-import lt.tlistas.loginn.mobile.android.plugin.web.service.WorkLogRetrofitService
+import lt.tlistas.loginn.mobile.android.plugin.web.service.WorkLogWebService
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -19,7 +19,7 @@ import retrofit2.Response
 class WorkLogRetrofitGatewayAdapterTest {
 
     @Mock
-    private lateinit var workLogRetrofitServiceMock: WorkLogRetrofitService
+    private lateinit var workLogWebServiceMock: WorkLogWebService
 
     @Mock
     private lateinit var callMock: Call<Void>
@@ -30,12 +30,12 @@ class WorkLogRetrofitGatewayAdapterTest {
     @Test
     fun `Logs work by location using Retrofit`() {
         val locationMock = GpsCoordinates(15.0, 20.0)
-        doReturn(callMock).`when`(workLogRetrofitServiceMock).logByLocation(eq(locationMock))
+        doReturn(callMock).`when`(workLogWebServiceMock).logByLocation(eq(locationMock))
         doReturn(responseMock).`when`(callMock).execute()
 
-        WorkLogRetrofitGatewayAdapter("token", workLogRetrofitServiceMock).logByLocation(locationMock)
+        WorkLogRetrofitGatewayAdapter("token", workLogWebServiceMock).logByLocation(locationMock)
 
-        verify(workLogRetrofitServiceMock).logByLocation(same(locationMock))
+        verify(workLogWebServiceMock).logByLocation(same(locationMock))
         verify(callMock).execute()
     }
 }

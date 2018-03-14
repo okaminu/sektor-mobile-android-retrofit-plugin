@@ -35,9 +35,9 @@ class RetrofitFactory(
 
     private fun defaultOkHttpClientBuilder() = okHttpClient.newBuilder().apply {
         val prop = propertyLoader.load(TIMEOUT_PROPERTIES)
-        readTimeout(getValue(prop, "READ_TIMEOUT"), SECONDS)
-        writeTimeout(getValue(prop, "WRITE_TIMEOUT"), SECONDS)
-        connectTimeout(getValue(prop, "CONNECT_TIMEOUT"), SECONDS)
+        readTimeout(getValue(prop, "READ_TIMEOUT_SECONDS"), SECONDS)
+        writeTimeout(getValue(prop, "WRITE_TIMEOUT_SECONDS"), SECONDS)
+        connectTimeout(getValue(prop, "CONNECT_TIMEOUT_SECONDS"), SECONDS)
     }
 
     private fun getValue(prop: Properties, key: String) = prop[key].toString().toLong()

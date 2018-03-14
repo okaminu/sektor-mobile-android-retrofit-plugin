@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.http.POST
 import retrofit2.http.Path
 
-interface IdentityConfirmationRetrofitService {
+interface IdentityConfirmationWebService {
 
     @POST("/collaborator/authentication/code/request/{mobileNumber}")
     fun requestCode(@Path("mobileNumber") mobileNumber: String): Call<Void>

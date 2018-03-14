@@ -4,7 +4,7 @@ import com.nhaarman.mockito_kotlin.*
 import lt.tlistas.loginn.mobile.android.plugin.PropertyLoader
 import lt.tlistas.loginn.mobile.android.plugin.web.factory.RetrofitFactory
 import lt.tlistas.loginn.mobile.android.plugin.web.interceptor.AuthenticationInterceptor
-import lt.tlistas.loginn.mobile.android.plugin.web.service.WorkTimeRetrofitService
+import lt.tlistas.loginn.mobile.android.plugin.web.service.WorkTimeWebService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.junit.Assert.assertNotNull
@@ -41,7 +41,7 @@ class RetrofitFactoryTest {
         mockRetrofitBuilder()
         mockOkHttpClientBuilder()
 
-        retrofitFactory.create(WorkTimeRetrofitService::class.java)
+        retrofitFactory.create(WorkTimeWebService::class.java)
 
         verifyOkHttpBuilderMock()
         verify(okHttpClientMock, never()).interceptors()
@@ -60,7 +60,7 @@ class RetrofitFactoryTest {
         doReturn(interceptorsMock).`when`(okHttpBuilderMock).interceptors()
         doReturn(true).`when`(interceptorsMock).add(any())
 
-        retrofitFactory.create(WorkTimeRetrofitService::class.java, "token")
+        retrofitFactory.create(WorkTimeWebService::class.java, "token")
 
         verifyOkHttpBuilderMock()
         verify(okHttpBuilderMock).interceptors()
