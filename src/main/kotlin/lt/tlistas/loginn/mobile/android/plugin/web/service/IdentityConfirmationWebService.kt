@@ -1,5 +1,9 @@
 package lt.tlistas.loginn.mobile.android.plugin.web.service
 
+import retrofit2.Call
+import retrofit2.http.POST
+import retrofit2.http.Path
+
 interface IdentityConfirmationWebService {
 
     @POST("/collaborator/identity-confirmation/code/request/{mobileNumber}")
