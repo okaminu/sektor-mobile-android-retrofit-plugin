@@ -13,6 +13,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
+import retrofit2.Retrofit
 import retrofit2.Retrofit.Builder
 import java.util.*
 
@@ -42,14 +43,14 @@ class RetrofitFactoryTest {
 
     @Test
     fun `Gets Retrofit service without token`() {
-        mockRetrofitBuilder()
         mockOkHttpClientBuilder()
+        mockRetrofitBuilder()
 
         retrofitFactory.create(WorkTimeWebService::class.java)
 
         verifyOkHttpBuilderMock()
         verify(okHttpClientMock, never()).interceptors()
-        verify(retrofitBuilderMock).client(any())
+        verify(retrofitBuilderMock).client(okHttpClientMock)
         verify(retrofitBuilderMock).addConverterFactory(any())
         verify(retrofitBuilderMock).baseUrl(any<String>())
         verify(retrofitBuilderMock).build()
@@ -70,7 +71,7 @@ class RetrofitFactoryTest {
         verifyOkHttpBuilderMock()
         verify(okHttpBuilderMock).interceptors()
         verify(interceptorsMock).add(any<AuthenticationInterceptor>())
-        verify(retrofitBuilderMock).client(any())
+        verify(retrofitBuilderMock).client(okHttpClientMock)
         verify(retrofitBuilderMock).addConverterFactory(any())
         verify(retrofitBuilderMock).baseUrl(any<String>())
         verify(retrofitBuilderMock).build()
@@ -86,10 +87,11 @@ class RetrofitFactoryTest {
         doReturn(okHttpBuilderMock).`when`(okHttpBuilderMock).readTimeout(any(), any())
         doReturn(okHttpBuilderMock).`when`(okHttpBuilderMock).writeTimeout(any(), any())
         doReturn(okHttpBuilderMock).`when`(okHttpBuilderMock).connectTimeout(any(), any())
+        doReturn(okHttpClientMock).`when`(okHttpBuilderMock).build()
     }
 
     private fun mockRetrofitBuilder() {
-        val retrofitMock = Builder().baseUrl("http://www.test.com").build()
+        val retrofitMock = mock<Retrofit>()
         doReturn(retrofitMock).`when`(retrofitBuilderMock).build()
         val propertyMock = mock<Properties>()
         doReturn("URL").`when`(propertyMock)[any()]
