@@ -20,13 +20,17 @@ import java.util.*
 @RunWith(MockitoJUnitRunner::class)
 class RetrofitFactoryTest {
 
-    @Mock private lateinit var retrofitBuilderMock: Builder
+    @Mock
+    private lateinit var retrofitBuilderMock: Builder
 
-    @Mock private lateinit var propertyLoaderMock: PropertyLoader
+    @Mock
+    private lateinit var propertyLoaderMock: PropertyLoader
 
-    @Mock private lateinit var okHttpClientMock: OkHttpClient
+    @Mock
+    private lateinit var okHttpClientMock: OkHttpClient
 
-    @Mock private lateinit var okHttpBuilderMock: OkHttpClient.Builder
+    @Mock
+    private lateinit var okHttpBuilderMock: OkHttpClient.Builder
 
     private lateinit var retrofitFactory: RetrofitFactory
 
@@ -45,6 +49,7 @@ class RetrofitFactoryTest {
 
         verifyOkHttpBuilderMock()
         verify(okHttpClientMock, never()).interceptors()
+        verify(retrofitBuilderMock).client(any())
         verify(retrofitBuilderMock).addConverterFactory(any())
         verify(retrofitBuilderMock).baseUrl(any<String>())
         verify(retrofitBuilderMock).build()
@@ -65,6 +70,7 @@ class RetrofitFactoryTest {
         verifyOkHttpBuilderMock()
         verify(okHttpBuilderMock).interceptors()
         verify(interceptorsMock).add(any<AuthenticationInterceptor>())
+        verify(retrofitBuilderMock).client(any())
         verify(retrofitBuilderMock).addConverterFactory(any())
         verify(retrofitBuilderMock).baseUrl(any<String>())
         verify(retrofitBuilderMock).build()
