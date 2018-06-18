@@ -1,3 +1,3 @@
 Environment variables:
 
-LOGINN_BACKEND_URL - server url
+SEKTOR_BACKEND_URL - server url

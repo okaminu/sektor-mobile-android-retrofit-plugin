@@ -8,7 +8,7 @@ repositories {
     }
     repositories {
         maven {
-            url 's3://repository.tlist.no/releases'
+            url 's3://repository.boldadmin.com/releases'
             credentials(AwsCredentials) {
                 accessKey awsCredentials.AWSAccessKeyId
                 secretKey awsCredentials.AWSSecretKey
@@ -19,7 +19,7 @@ repositories {
 
 dependencies {
 
-    compile 'lt.tlistas.loginn:android-api:1.1.1'
+    compile 'lt.boldadmin.sektor:android-api:1.1.1'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"

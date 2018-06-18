@@ -2,7 +2,7 @@ task writeEnvVariablesToProperty {
     def props = new Properties()
     def writer = new FileWriter(file('src/main/resources/config.properties'))
     try {
-        props.setProperty('BACKEND_URL', System.getenv("LOGINN_BACKEND_URL"))
+        props.setProperty('BACKEND_URL', System.getenv("SEKTOR_BACKEND_URL"))
         props.store(writer, null)
         writer.flush()
     } finally {
