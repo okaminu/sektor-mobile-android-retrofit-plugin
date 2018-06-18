@@ -1,7 +1,7 @@
 package lt.boldadmin.sektor.mobile.android.plugin.web.adapter
 
 import lt.boldadmin.sektor.mobile.android.api.gateway.WorkLogGateway
-import lt.boldadmin.sektor.mobile.android.api.type.valueobject.GpsCoordinates
+import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
 import lt.boldadmin.sektor.mobile.android.plugin.web.factory.RetrofitFactory
 import lt.boldadmin.sektor.mobile.android.plugin.web.service.WorkLogWebService
 

@@ -4,8 +4,7 @@ import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.same
 import com.nhaarman.mockito_kotlin.verify
-import lt.boldadmin.sektor.mobile.android.api.type.valueobject.GpsCoordinates
-import lt.boldadmin.sektor.mobile.android.plugin.web.adapter.WorkLogRetrofitGatewayAdapter
+import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
 import lt.boldadmin.sektor.mobile.android.plugin.web.service.WorkLogWebService
 import org.junit.Test
 import org.junit.runner.RunWith
