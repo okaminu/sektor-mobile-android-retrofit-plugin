@@ -6,7 +6,6 @@ import com.nhaarman.mockito_kotlin.same
 import com.nhaarman.mockito_kotlin.verify
 import lt.boldadmin.sektor.mobile.android.api.exception.CollaboratorNotFoundException
 import lt.boldadmin.sektor.mobile.android.api.exception.IncorrectConfirmationCodeException
-import lt.boldadmin.sektor.mobile.android.plugin.web.adapter.IdentityConfirmationRetrofitAdapter
 import lt.boldadmin.sektor.mobile.android.plugin.web.service.IdentityConfirmationWebService
 import org.junit.Assert.assertNotNull
 import org.junit.Before

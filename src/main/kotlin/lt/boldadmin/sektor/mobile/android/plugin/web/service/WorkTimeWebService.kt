@@ -1,6 +1,6 @@
 package lt.boldadmin.sektor.mobile.android.plugin.web.service
 
-import lt.boldadmin.sektor.mobile.android.api.type.valueobject.WorkTime
+import lt.boldadmin.sektor.mobile.android.api.valueobject.WorkTime
 import retrofit2.Call
 import retrofit2.http.GET
 

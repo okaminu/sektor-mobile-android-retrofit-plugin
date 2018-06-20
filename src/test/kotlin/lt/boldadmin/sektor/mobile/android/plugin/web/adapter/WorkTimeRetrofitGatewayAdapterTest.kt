@@ -1,8 +1,7 @@
 package lt.boldadmin.sektor.mobile.android.plugin.web.adapter
 
 import com.nhaarman.mockito_kotlin.doReturn
-import lt.boldadmin.sektor.mobile.android.api.type.valueobject.WorkTime
-import lt.boldadmin.sektor.mobile.android.plugin.web.adapter.WorkTimeRetrofitGatewayAdapter
+import lt.boldadmin.sektor.mobile.android.api.valueobject.WorkTime
 import lt.boldadmin.sektor.mobile.android.plugin.web.service.WorkTimeWebService
 import org.junit.Assert.assertEquals
 import org.junit.Test
