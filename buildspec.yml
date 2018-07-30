@@ -1,0 +1,10 @@
+version: 0.1
+
+phases:
+  build:
+    commands:
+      - ./gradlew build publish
+artifacts:
+  files:
+    - 'build/libs/sektor-mobile-android-retrofit-plugin.jar'
+  discard-paths: yes
