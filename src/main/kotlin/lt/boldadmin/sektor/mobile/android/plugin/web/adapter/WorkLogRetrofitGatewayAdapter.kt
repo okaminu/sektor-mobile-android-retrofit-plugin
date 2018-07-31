@@ -11,4 +11,6 @@ class WorkLogRetrofitGatewayAdapter(token: String, private val webClient: WorkLo
     override fun logByLocation(gpsCoordinates: GpsCoordinates) {
         webClient.logByLocation(gpsCoordinates).execute()
     }
+
+    override fun getProjectNameOfStartedWork(): String = webClient.getProjectNameOfStartedWork().execute().body()
 }
