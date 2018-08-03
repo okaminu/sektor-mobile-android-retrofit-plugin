@@ -14,4 +14,7 @@ interface WorkLogWebService {
     @GET("/worklog/project-name-of-started-work")
     fun getProjectNameOfStartedWork(): Call<String>
 
+    @GET("/worklog/has-work-started")
+    fun hasWorkStarted(): Call<Boolean>
+
 }

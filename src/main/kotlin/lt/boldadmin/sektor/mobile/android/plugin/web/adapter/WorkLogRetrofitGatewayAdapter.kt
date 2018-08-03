@@ -14,4 +14,7 @@ class WorkLogRetrofitGatewayAdapter(
     }
 
     override fun getProjectNameOfStartedWork(): String = webClient.getProjectNameOfStartedWork().execute().body()
+
+    override fun hasWorkStarted(): Boolean = webClient.hasWorkStarted().execute().body()
+
 }

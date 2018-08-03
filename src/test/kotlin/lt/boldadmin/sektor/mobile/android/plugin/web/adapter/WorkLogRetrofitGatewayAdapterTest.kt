@@ -5,6 +5,7 @@ import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.same
 import com.nhaarman.mockito_kotlin.verify
 import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertTrue
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
 import lt.boldadmin.sektor.mobile.android.plugin.web.service.WorkLogWebService
 import org.junit.Test
@@ -56,6 +57,21 @@ class WorkLogRetrofitGatewayAdapterTest {
 
         assertEquals(projectName, projectNameOfStartedWork)
         verify(workLogWebServiceMock).getProjectNameOfStartedWork()
+        verify(callMock).execute()
+    }
+
+    @Test
+    fun `Retrieves work status`() {
+        doReturn(callMock).`when`(workLogWebServiceMock).hasWorkStarted()
+        doReturn(Response.success(true)).`when`(callMock).execute()
+
+        val workStatus = WorkLogRetrofitGatewayAdapter(
+                "token",
+                workLogWebServiceMock
+        ).hasWorkStarted()
+
+        assertTrue(workStatus)
+        verify(workLogWebServiceMock).hasWorkStarted()
         verify(callMock).execute()
     }
 }
