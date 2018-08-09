@@ -2,9 +2,7 @@ package lt.boldadmin.sektor.mobile.android.plugin.web.service
 
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface WorkLogWebService {
 
@@ -16,5 +14,11 @@ interface WorkLogWebService {
 
     @GET("/worklog/has-work-started")
     fun hasWorkStarted(): Call<Boolean>
+
+    @POST("/worklog/update-description/{intervalId}")
+    fun updateDescription(
+        @Path("intervalId") intervalId: String,
+        @Body description: String
+    ): Call<Void>
 
 }

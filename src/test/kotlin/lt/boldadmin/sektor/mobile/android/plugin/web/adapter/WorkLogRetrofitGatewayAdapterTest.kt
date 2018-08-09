@@ -74,4 +74,23 @@ class WorkLogRetrofitGatewayAdapterTest {
         verify(workLogWebServiceMock).hasWorkStarted()
         verify(callMock).execute()
     }
+
+    @Test
+    fun `Updates worklog description`() {
+        val intervalId = "intervalId"
+        val description = "description"
+        doReturn(callMock)
+            .`when`(workLogWebServiceMock)
+            .updateDescription(eq(intervalId), eq(description))
+
+        doReturn(responseMock).`when`(callMock).execute()
+
+        WorkLogRetrofitGatewayAdapter(
+            "token",
+            workLogWebServiceMock
+        ).updateDescription(intervalId, description)
+
+        verify(workLogWebServiceMock).updateDescription(eq(intervalId), eq(description))
+        verify(callMock).execute()
+    }
 }

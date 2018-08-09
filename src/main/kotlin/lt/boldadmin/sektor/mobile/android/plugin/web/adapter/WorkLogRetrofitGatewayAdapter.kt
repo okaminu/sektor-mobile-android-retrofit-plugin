@@ -17,4 +17,8 @@ class WorkLogRetrofitGatewayAdapter(
 
     override fun hasWorkStarted(): Boolean = webClient.hasWorkStarted().execute().body()
 
+    override fun updateDescription(intervalId: String, description: String) {
+        webClient.updateDescription(intervalId, description).execute()
+    }
+
 }
