@@ -1,13 +1,12 @@
 package lt.boldadmin.sektor.mobile.android.plugin.web.adapter
 
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.eq
-import com.nhaarman.mockito_kotlin.same
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.*
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
 import lt.boldadmin.sektor.mobile.android.plugin.web.service.WorkLogWebService
+import okhttp3.RequestBody
+import okio.Buffer
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -81,7 +80,7 @@ class WorkLogRetrofitGatewayAdapterTest {
         val description = "description"
         doReturn(callMock)
             .`when`(workLogWebServiceMock)
-            .updateDescription(eq(intervalId), eq(description))
+            .updateDescription(eq(intervalId), any())
 
         doReturn(responseMock).`when`(callMock).execute()
 
@@ -90,7 +89,14 @@ class WorkLogRetrofitGatewayAdapterTest {
             workLogWebServiceMock
         ).updateDescription(intervalId, description)
 
-        verify(workLogWebServiceMock).updateDescription(eq(intervalId), eq(description))
-        verify(callMock).execute()
+        argumentCaptor<RequestBody>().apply {
+            verify(workLogWebServiceMock).updateDescription(eq(intervalId), capture())
+            verify(callMock).execute()
+
+            Buffer().also {
+                firstValue.writeTo(it)
+                assertEquals(description, it.readUtf8())
+            }
+        }
     }
 }
