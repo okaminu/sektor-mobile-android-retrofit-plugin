@@ -1,8 +1,9 @@
-package lt.boldadmin.sektor.mobile.android.plugin.web.adapter
+package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.adapter
 
 import com.nhaarman.mockito_kotlin.doReturn
 import lt.boldadmin.sektor.mobile.android.api.valueobject.WorkTime
-import lt.boldadmin.sektor.mobile.android.plugin.web.service.WorkTimeWebService
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.WorkTimeRetrofitGatewayAdapter
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorkTimeWebService
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -22,10 +23,10 @@ class WorkTimeRetrofitGatewayAdapterTest {
 
     @Test
     fun `Gets work time`() {
-        val workTimeRetrofitGatewayAdapter = WorkTimeRetrofitGatewayAdapter(
-                "token",
-                workTimeWebServiceMock
-        )
+        val workTimeRetrofitGatewayAdapter =
+            WorkTimeRetrofitGatewayAdapter(
+                "token", workTimeWebServiceMock
+            )
         val workTimeMock = WorkTime()
         val responseMock = Response.success(WorkTime())
         doReturn(callMock).`when`(workTimeWebServiceMock).getWorkTime()

@@ -1,9 +1,9 @@
-package lt.boldadmin.sektor.mobile.android.plugin.web.adapter
+package lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter
 
 import lt.boldadmin.sektor.mobile.android.api.gateway.WorkTimeGateway
 import lt.boldadmin.sektor.mobile.android.api.valueobject.WorkTime
-import lt.boldadmin.sektor.mobile.android.plugin.web.factory.RetrofitFactory
-import lt.boldadmin.sektor.mobile.android.plugin.web.service.WorkTimeWebService
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.factory.RetrofitFactory
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorkTimeWebService
 
 class WorkTimeRetrofitGatewayAdapter(
     token: String,

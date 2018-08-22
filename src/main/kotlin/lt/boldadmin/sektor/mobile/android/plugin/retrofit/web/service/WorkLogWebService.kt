@@ -1,4 +1,4 @@
-package lt.boldadmin.sektor.mobile.android.plugin.web.service
+package lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service
 
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
 import okhttp3.RequestBody

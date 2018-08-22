@@ -1,9 +1,10 @@
-package lt.boldadmin.sektor.mobile.android.plugin.web.factory
+package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.factory
 
 import com.nhaarman.mockito_kotlin.*
-import lt.boldadmin.sektor.mobile.android.plugin.PropertyLoader
-import lt.boldadmin.sektor.mobile.android.plugin.web.interceptor.AuthenticationInterceptor
-import lt.boldadmin.sektor.mobile.android.plugin.web.service.WorkTimeWebService
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.PropertyLoader
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.factory.RetrofitFactory
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.interceptor.AuthenticationInterceptor
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorkTimeWebService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.junit.Assert.assertNotNull
@@ -38,9 +39,7 @@ class RetrofitFactoryTest {
     fun `Set up`() {
         mockOkHttpClientBuilder()
         retrofitFactory = RetrofitFactory(
-                propertyLoaderMock,
-                retrofitBuilderMock,
-                okHttpClientMock
+            propertyLoaderMock, retrofitBuilderMock, okHttpClientMock
         )
     }
 

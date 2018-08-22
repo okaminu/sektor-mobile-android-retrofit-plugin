@@ -1,10 +1,11 @@
-package lt.boldadmin.sektor.mobile.android.plugin.web.adapter
+package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.adapter
 
 import com.nhaarman.mockito_kotlin.*
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
-import lt.boldadmin.sektor.mobile.android.plugin.web.service.WorkLogWebService
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.WorkLogRetrofitGatewayAdapter
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorkLogWebService
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -36,8 +37,7 @@ class WorkLogRetrofitGatewayAdapterTest {
         doReturn(responseMock).`when`(callMock).execute()
 
         WorkLogRetrofitGatewayAdapter(
-                "token",
-                workLogWebServiceMock
+            "token", workLogWebServiceMock
         ).logByLocation(locationMock)
 
         verify(workLogWebServiceMock).logByLocation(same(locationMock))
@@ -52,7 +52,10 @@ class WorkLogRetrofitGatewayAdapterTest {
         doReturn(callMock).`when`(workLogWebServiceMock).getProjectNameOfStartedWork()
         doReturn(Response.success(responseBody)).`when`(callMock).execute()
 
-        val actualProjectName = WorkLogRetrofitGatewayAdapter("token", workLogWebServiceMock)
+        val actualProjectName = WorkLogRetrofitGatewayAdapter(
+            "token",
+            workLogWebServiceMock
+        )
             .getProjectNameOfStartedWork()
 
         assertEquals(expectedProjectName, actualProjectName)
@@ -64,8 +67,7 @@ class WorkLogRetrofitGatewayAdapterTest {
         doReturn(Response.success(true)).`when`(callMock).execute()
 
         val workStatus = WorkLogRetrofitGatewayAdapter(
-                "token",
-                workLogWebServiceMock
+            "token", workLogWebServiceMock
         ).hasWorkStarted()
 
         assertTrue(workStatus)
@@ -82,8 +84,7 @@ class WorkLogRetrofitGatewayAdapterTest {
         doReturn(responseMock).`when`(callMock).execute()
 
         WorkLogRetrofitGatewayAdapter(
-            "token",
-            workLogWebServiceMock
+            "token", workLogWebServiceMock
         ).updateDescription(intervalId, description)
 
         argumentCaptor<RequestBody>().apply {

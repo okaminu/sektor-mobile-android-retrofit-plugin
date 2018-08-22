@@ -1,8 +1,8 @@
-package lt.boldadmin.sektor.mobile.android.plugin.web.factory
+package lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.factory
 
 import com.google.gson.GsonBuilder
-import lt.boldadmin.sektor.mobile.android.plugin.PropertyLoader
-import lt.boldadmin.sektor.mobile.android.plugin.web.interceptor.AuthenticationInterceptor
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.PropertyLoader
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.interceptor.AuthenticationInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.Retrofit.Builder
@@ -33,9 +33,9 @@ class RetrofitFactory(
 
     private fun build(okHttpClientBuilder: OkHttpClient.Builder, authToken: String): Retrofit {
         okHttpClientBuilder.interceptors().add(
-                AuthenticationInterceptor(
-                        authToken
-                )
+            AuthenticationInterceptor(
+                authToken
+            )
         )
 
         return build(okHttpClientBuilder)

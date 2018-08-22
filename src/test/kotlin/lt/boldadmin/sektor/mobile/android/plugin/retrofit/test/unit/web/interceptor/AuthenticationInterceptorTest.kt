@@ -1,6 +1,7 @@
-package lt.boldadmin.sektor.mobile.android.plugin.web.interceptor
+package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.interceptor
 
 import com.nhaarman.mockito_kotlin.*
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.interceptor.AuthenticationInterceptor
 import okhttp3.Interceptor.Chain
 import okhttp3.Request
 import okhttp3.Request.Builder
@@ -21,7 +22,8 @@ class AuthenticationInterceptorTest {
         doReturn(mock<Request>()).`when`(okHttpBuilderMock).build()
         doReturn(mock<Response>()).`when`(chainMock).proceed(any())
 
-        val response = AuthenticationInterceptor("token").intercept(chainMock)
+        val response = AuthenticationInterceptor("token")
+            .intercept(chainMock)
 
         assertNotNull(response)
         verify(chainMock).request()

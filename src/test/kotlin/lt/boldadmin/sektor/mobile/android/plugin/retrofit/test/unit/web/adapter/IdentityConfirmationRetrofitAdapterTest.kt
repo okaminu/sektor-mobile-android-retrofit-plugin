@@ -1,4 +1,4 @@
-package lt.boldadmin.sektor.mobile.android.plugin.web.adapter
+package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.adapter
 
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.eq
@@ -6,7 +6,8 @@ import com.nhaarman.mockito_kotlin.same
 import com.nhaarman.mockito_kotlin.verify
 import lt.boldadmin.sektor.mobile.android.api.exception.CollaboratorNotFoundException
 import lt.boldadmin.sektor.mobile.android.api.exception.IncorrectConfirmationCodeException
-import lt.boldadmin.sektor.mobile.android.plugin.web.service.IdentityConfirmationWebService
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.IdentityConfirmationRetrofitAdapter
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.IdentityConfirmationWebService
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
@@ -35,9 +36,10 @@ class IdentityConfirmationRetrofitAdapterTest {
 
     @Before
     fun setUp() {
-        gatewayAdapter = IdentityConfirmationRetrofitAdapter(
+        gatewayAdapter =
+            IdentityConfirmationRetrofitAdapter(
                 webClientMock
-        )
+            )
     }
 
     @Test

@@ -1,14 +1,15 @@
-package lt.boldadmin.sektor.mobile.android.plugin.web.adapter
+package lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter
 
 import lt.boldadmin.sektor.mobile.android.api.gateway.WorkLogGateway
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
-import lt.boldadmin.sektor.mobile.android.plugin.web.factory.RetrofitFactory
-import lt.boldadmin.sektor.mobile.android.plugin.web.service.WorkLogWebService
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.factory.RetrofitFactory
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorkLogWebService
 import okhttp3.MediaType
 import okhttp3.RequestBody
 
 class WorkLogRetrofitGatewayAdapter(
-    token: String, private val webClient: WorkLogWebService = RetrofitFactory().create(WorkLogWebService::class.java, token)
+    token: String, private val webClient: WorkLogWebService = RetrofitFactory().create(
+        WorkLogWebService::class.java, token)
 ) : WorkLogGateway {
 
     override fun logByLocation(gpsCoordinates: GpsCoordinates) {

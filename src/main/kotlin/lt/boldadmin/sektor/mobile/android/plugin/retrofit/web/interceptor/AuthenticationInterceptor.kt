@@ -1,4 +1,4 @@
-package lt.boldadmin.sektor.mobile.android.plugin.web.interceptor
+package lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Interceptor.Chain

@@ -1,6 +1,6 @@
-package lt.boldadmin.sektor.mobile.android.plugin
+package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit
 
-import lt.boldadmin.sektor.mobile.android.plugin.PropertyLoader
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.PropertyLoader
 import org.junit.Assert.assertNotNull
 import org.junit.Test
 

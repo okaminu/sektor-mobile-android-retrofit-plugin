@@ -1,4 +1,4 @@
-package lt.boldadmin.sektor.mobile.android.plugin
+package lt.boldadmin.sektor.mobile.android.plugin.retrofit
 
 import java.util.*
 

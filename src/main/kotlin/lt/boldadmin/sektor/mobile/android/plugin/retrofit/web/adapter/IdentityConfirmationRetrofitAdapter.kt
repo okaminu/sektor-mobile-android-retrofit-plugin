@@ -1,10 +1,10 @@
-package lt.boldadmin.sektor.mobile.android.plugin.web.adapter
+package lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter
 
 import lt.boldadmin.sektor.mobile.android.api.exception.CollaboratorNotFoundException
 import lt.boldadmin.sektor.mobile.android.api.exception.IncorrectConfirmationCodeException
 import lt.boldadmin.sektor.mobile.android.api.gateway.IdentityConfirmationGateway
-import lt.boldadmin.sektor.mobile.android.plugin.web.factory.RetrofitFactory
-import lt.boldadmin.sektor.mobile.android.plugin.web.service.IdentityConfirmationWebService
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.factory.RetrofitFactory
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.IdentityConfirmationWebService
 
 class IdentityConfirmationRetrofitAdapter(
     private val webClient: IdentityConfirmationWebService = RetrofitFactory()
