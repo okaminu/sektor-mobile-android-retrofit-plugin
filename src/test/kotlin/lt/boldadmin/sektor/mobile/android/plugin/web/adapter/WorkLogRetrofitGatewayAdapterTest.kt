@@ -5,7 +5,9 @@ import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
 import lt.boldadmin.sektor.mobile.android.plugin.web.service.WorkLogWebService
+import okhttp3.MediaType
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import okio.Buffer
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -44,19 +46,16 @@ class WorkLogRetrofitGatewayAdapterTest {
 
     @Test
     fun `Retrieves project name of started work`() {
-        val projectName = "ProjectName"
+        val expectedProjectName = "ProjectName"
 
+        val responseBody = ResponseBody.create(MediaType.parse(""), expectedProjectName)
         doReturn(callMock).`when`(workLogWebServiceMock).getProjectNameOfStartedWork()
-        doReturn(Response.success(projectName)).`when`(callMock).execute()
+        doReturn(Response.success(responseBody)).`when`(callMock).execute()
 
-        val projectNameOfStartedWork = WorkLogRetrofitGatewayAdapter(
-                "token",
-                workLogWebServiceMock
-        ).getProjectNameOfStartedWork()
+        val actualProjectName = WorkLogRetrofitGatewayAdapter("token", workLogWebServiceMock)
+            .getProjectNameOfStartedWork()
 
-        assertEquals(projectName, projectNameOfStartedWork)
-        verify(workLogWebServiceMock).getProjectNameOfStartedWork()
-        verify(callMock).execute()
+        assertEquals(expectedProjectName, actualProjectName)
     }
 
     @Test
@@ -70,8 +69,6 @@ class WorkLogRetrofitGatewayAdapterTest {
         ).hasWorkStarted()
 
         assertTrue(workStatus)
-        verify(workLogWebServiceMock).hasWorkStarted()
-        verify(callMock).execute()
     }
 
     @Test

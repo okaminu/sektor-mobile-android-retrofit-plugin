@@ -15,7 +15,10 @@ class WorkLogRetrofitGatewayAdapter(
         webClient.logByLocation(gpsCoordinates).execute()
     }
 
-    override fun getProjectNameOfStartedWork(): String = webClient.getProjectNameOfStartedWork().execute().body()
+    override fun getProjectNameOfStartedWork(): String = webClient.getProjectNameOfStartedWork()
+        .execute()
+        .body()
+        .string()
 
     override fun hasWorkStarted(): Boolean = webClient.hasWorkStarted().execute().body()
 

@@ -1,8 +1,8 @@
 package lt.boldadmin.sektor.mobile.android.plugin.web.service
 
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
-import okhttp3.MediaType
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -12,7 +12,7 @@ interface WorkLogWebService {
     fun logByLocation(@Body gpsCoordinates: GpsCoordinates): Call<Void>
 
     @GET("/worklog/project-name-of-started-work")
-    fun getProjectNameOfStartedWork(): Call<String>
+    fun getProjectNameOfStartedWork(): Call<ResponseBody>
 
     @GET("/worklog/has-work-started")
     fun hasWorkStarted(): Call<Boolean>
