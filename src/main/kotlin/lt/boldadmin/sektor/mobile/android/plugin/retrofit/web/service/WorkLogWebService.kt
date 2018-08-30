@@ -17,6 +17,9 @@ interface WorkLogWebService {
     @GET("/worklog/has-work-started")
     fun hasWorkStarted(): Call<Boolean>
 
+    @GET("/worklog/collaborator/interval-ids")
+    fun getIntervalIdsByCollaborator(): Call<List<String>>
+
     @POST("/worklog/update-description/{intervalId}")
     fun updateDescription(
         @Path("intervalId") intervalId: String,

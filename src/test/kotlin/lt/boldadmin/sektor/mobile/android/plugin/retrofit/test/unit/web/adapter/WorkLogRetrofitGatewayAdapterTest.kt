@@ -1,8 +1,6 @@
 package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.adapter
 
 import com.nhaarman.mockito_kotlin.*
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertTrue
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.WorkLogRetrofitGatewayAdapter
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorkLogWebService
@@ -10,6 +8,8 @@ import okhttp3.MediaType
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import okio.Buffer
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -96,5 +96,16 @@ class WorkLogRetrofitGatewayAdapterTest {
                 assertEquals(description, it.readUtf8())
             }
         }
+    }
+    
+    @Test
+    fun `Retrieves worklog interval ids`() {
+        val expectedIntervalIds = listOf("id1")
+        doReturn(callMock).`when`(workLogWebServiceMock).getIntervalIdsByCollaborator()
+        doReturn(Response.success(expectedIntervalIds)).`when`(callMock).execute()
+
+        val actualIntervalIds = WorkLogRetrofitGatewayAdapter("token", workLogWebServiceMock).getIntervalIdsByCollaborator()
+
+        assertEquals(expectedIntervalIds, actualIntervalIds)
     }
 }
