@@ -8,14 +8,8 @@ import retrofit2.http.*
 
 interface WorkLogWebService {
 
-    @POST("/worklog/log-by-location")
-    fun logByLocation(@Body gpsCoordinates: GpsCoordinates): Call<Void>
-
     @GET("/worklog/collaborator/interval-ids")
     fun getIntervalIdsByCollaborator(): Call<List<String>>
-
-    @GET("/worklog/interval/{intervalId}/description")
-    fun getDescription(@Path("intervalId") intervalId: String): Call<ResponseBody>
 
     @GET("/worklog/project-name-of-started-work")
     fun getProjectNameOfStartedWork(): Call<ResponseBody>
@@ -23,8 +17,14 @@ interface WorkLogWebService {
     @GET("/worklog/has-work-started")
     fun hasWorkStarted(): Call<Boolean>
 
+    @GET("/worklog/interval/{intervalId}/description")
+    fun getDescription(@Path("intervalId") intervalId: String): Call<ResponseBody>
+
     @GET("/worklog/interval/{intervalIds}/durations-sum")
     fun getDurationsSum(@Path("intervalIds") intervalIds: String): Call<Long>
+
+    @POST("/worklog/log-by-location")
+    fun logByLocation(@Body gpsCoordinates: GpsCoordinates): Call<Void>
 
     @POST("/worklog/update-description/{intervalId}")
     fun updateDescription(
