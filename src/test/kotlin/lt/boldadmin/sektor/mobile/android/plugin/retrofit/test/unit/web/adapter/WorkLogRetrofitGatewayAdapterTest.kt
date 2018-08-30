@@ -36,7 +36,9 @@ class WorkLogRetrofitGatewayAdapterTest {
         doReturn(callMock).`when`(workLogWebServiceMock).getIntervalIdsByCollaborator()
         doReturn(Response.success(expectedIntervalIds)).`when`(callMock).execute()
 
-        val actualIntervalIds = WorkLogRetrofitGatewayAdapter("token", workLogWebServiceMock).getIntervalIdsByCollaborator()
+        val actualIntervalIds = WorkLogRetrofitGatewayAdapter(
+            "token", workLogWebServiceMock
+        ).getIntervalIdsByCollaborator()
 
         assertEquals(expectedIntervalIds, actualIntervalIds)
     }
@@ -50,10 +52,8 @@ class WorkLogRetrofitGatewayAdapterTest {
         doReturn(Response.success(responseBody)).`when`(callMock).execute()
 
         val actualProjectName = WorkLogRetrofitGatewayAdapter(
-            "token",
-            workLogWebServiceMock
-        )
-            .getProjectNameOfStartedWork()
+            "token", workLogWebServiceMock
+        ).getProjectNameOfStartedWork()
 
         assertEquals(expectedProjectName, actualProjectName)
     }
@@ -78,7 +78,9 @@ class WorkLogRetrofitGatewayAdapterTest {
         doReturn(callMock).`when`(workLogWebServiceMock).getDescription(eq(intervalId))
         doReturn(Response.success(responseBody)).`when`(callMock).execute()
 
-        val actualDescription = WorkLogRetrofitGatewayAdapter("token", workLogWebServiceMock).getDescription(intervalId)
+        val actualDescription = WorkLogRetrofitGatewayAdapter(
+            "token", workLogWebServiceMock
+        ).getDescription(intervalId)
 
         assertEquals(expectedDescription, actualDescription)
     }
@@ -90,7 +92,9 @@ class WorkLogRetrofitGatewayAdapterTest {
         doReturn(callMock).`when`(workLogWebServiceMock).getDurationsSum("id1,id2")
         doReturn(Response.success(expectedDurationsSum)).`when`(callMock).execute()
 
-        val actualDurationsSum = WorkLogRetrofitGatewayAdapter("token", workLogWebServiceMock).getDurationsSum(intervalIds)
+        val actualDurationsSum = WorkLogRetrofitGatewayAdapter(
+            "token", workLogWebServiceMock
+        ).getDurationsSum(intervalIds)
 
         assertEquals(expectedDurationsSum, actualDurationsSum)
     }
@@ -133,5 +137,5 @@ class WorkLogRetrofitGatewayAdapterTest {
             }
         }
     }
-    
+
 }
