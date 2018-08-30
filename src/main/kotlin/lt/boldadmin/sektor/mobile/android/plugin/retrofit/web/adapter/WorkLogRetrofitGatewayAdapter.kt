@@ -18,6 +18,8 @@ class WorkLogRetrofitGatewayAdapter(
 
     override fun getIntervalIdsByCollaborator(): List<String> = webClient.getIntervalIdsByCollaborator().execute().body()
 
+    override fun getDescription(intervalId: String): String = webClient.getDescription(intervalId).execute().body().string()
+
     override fun getProjectNameOfStartedWork(): String = webClient.getProjectNameOfStartedWork()
         .execute()
         .body()

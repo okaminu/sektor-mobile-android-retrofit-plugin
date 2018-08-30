@@ -11,18 +11,22 @@ interface WorkLogWebService {
     @POST("/worklog/log-by-location")
     fun logByLocation(@Body gpsCoordinates: GpsCoordinates): Call<Void>
 
+    @GET("/worklog/collaborator/interval-ids")
+    fun getIntervalIdsByCollaborator(): Call<List<String>>
+
+    @GET("/worklog/interval/{intervalId}/description")
+    fun getDescription(@Path("intervalId") intervalId: String): Call<ResponseBody>
+
     @GET("/worklog/project-name-of-started-work")
     fun getProjectNameOfStartedWork(): Call<ResponseBody>
 
     @GET("/worklog/has-work-started")
     fun hasWorkStarted(): Call<Boolean>
 
-    @GET("/worklog/collaborator/interval-ids")
-    fun getIntervalIdsByCollaborator(): Call<List<String>>
-
     @POST("/worklog/update-description/{intervalId}")
     fun updateDescription(
         @Path("intervalId") intervalId: String,
         @Body descriptionBody: RequestBody
     ): Call<Void>
+
 }

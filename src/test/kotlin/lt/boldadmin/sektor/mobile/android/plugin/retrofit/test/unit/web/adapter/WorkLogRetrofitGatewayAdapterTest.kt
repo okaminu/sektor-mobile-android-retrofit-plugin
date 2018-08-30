@@ -108,4 +108,17 @@ class WorkLogRetrofitGatewayAdapterTest {
 
         assertEquals(expectedIntervalIds, actualIntervalIds)
     }
+    
+    @Test
+    fun `Retrieves worklog description`() {
+        val intervalId = "id"
+        val expectedDescription = "description"
+        val responseBody = ResponseBody.create(MediaType.parse(""), expectedDescription)
+        doReturn(callMock).`when`(workLogWebServiceMock).getDescription(eq(intervalId))
+        doReturn(Response.success(responseBody)).`when`(callMock).execute()
+
+        val actualDescription = WorkLogRetrofitGatewayAdapter("token", workLogWebServiceMock).getDescription(intervalId)
+
+        assertEquals(expectedDescription, actualDescription)
+    }
 }
