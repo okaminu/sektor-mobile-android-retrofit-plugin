@@ -18,14 +18,17 @@ class WorkLogRetrofitGatewayAdapter(
 
     override fun getIntervalIdsByCollaborator(): List<String> = webClient.getIntervalIdsByCollaborator().execute().body()
 
-    override fun getDescription(intervalId: String): String = webClient.getDescription(intervalId).execute().body().string()
-
     override fun getProjectNameOfStartedWork(): String = webClient.getProjectNameOfStartedWork()
         .execute()
         .body()
         .string()
 
+    override fun getDescription(intervalId: String): String = webClient.getDescription(intervalId).execute().body().string()
+
     override fun hasWorkStarted(): Boolean = webClient.hasWorkStarted().execute().body()
+
+    override fun getDurationsSum(intervalIds: Collection<String>): Long =
+        webClient.getDurationsSum(intervalIds.joinToString(",")).execute().body()
 
     override fun updateDescription(intervalId: String, description: String) {
         val descriptionBody = RequestBody.create(MediaType.parse("text/plain"), description)

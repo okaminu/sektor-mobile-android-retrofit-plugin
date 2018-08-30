@@ -23,6 +23,9 @@ interface WorkLogWebService {
     @GET("/worklog/has-work-started")
     fun hasWorkStarted(): Call<Boolean>
 
+    @GET("/worklog/interval/{intervalIds}/durations-sum")
+    fun getDurationsSum(@Path("intervalIds") intervalIds: String): Call<Long>
+
     @POST("/worklog/update-description/{intervalId}")
     fun updateDescription(
         @Path("intervalId") intervalId: String,

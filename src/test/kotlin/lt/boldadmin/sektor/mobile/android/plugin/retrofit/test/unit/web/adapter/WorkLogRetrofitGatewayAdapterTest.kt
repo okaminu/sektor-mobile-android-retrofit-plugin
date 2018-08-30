@@ -74,7 +74,7 @@ class WorkLogRetrofitGatewayAdapterTest {
     }
 
     @Test
-    fun `Updates worklog description`() {
+    fun `Updates work log description`() {
         val intervalId = "intervalId"
         val description = "description"
         doReturn(callMock)
@@ -99,7 +99,7 @@ class WorkLogRetrofitGatewayAdapterTest {
     }
     
     @Test
-    fun `Retrieves worklog interval ids`() {
+    fun `Retrieves work log interval ids`() {
         val expectedIntervalIds = listOf("id1")
         doReturn(callMock).`when`(workLogWebServiceMock).getIntervalIdsByCollaborator()
         doReturn(Response.success(expectedIntervalIds)).`when`(callMock).execute()
@@ -110,7 +110,7 @@ class WorkLogRetrofitGatewayAdapterTest {
     }
     
     @Test
-    fun `Retrieves worklog description`() {
+    fun `Retrieves work log description`() {
         val intervalId = "id"
         val expectedDescription = "description"
         val responseBody = ResponseBody.create(MediaType.parse(""), expectedDescription)
@@ -121,4 +121,17 @@ class WorkLogRetrofitGatewayAdapterTest {
 
         assertEquals(expectedDescription, actualDescription)
     }
+    
+    @Test
+    fun `Retrieves durations sums for several work logs`() {
+        val intervalIds = listOf("id1", "id2")
+        val expectedDurationsSum = 1000L
+        doReturn(callMock).`when`(workLogWebServiceMock).getDurationsSum("id1,id2")
+        doReturn(Response.success(expectedDurationsSum)).`when`(callMock).execute()
+
+        val actualDurationsSum = WorkLogRetrofitGatewayAdapter("token", workLogWebServiceMock).getDurationsSum(intervalIds)
+
+        assertEquals(expectedDurationsSum, actualDurationsSum)
+    }
+    
 }
