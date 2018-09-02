@@ -1,6 +1,7 @@
 package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.adapter
 
 import com.nhaarman.mockito_kotlin.*
+import lt.boldadmin.sektor.mobile.android.api.type.entity.WorkLogIntervalEndpoints
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.WorkLogRetrofitGatewayAdapter
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorkLogWebService
@@ -75,7 +76,7 @@ class WorkLogRetrofitGatewayAdapterTest {
         val intervalId = "id"
         val expectedDescription = "description"
         val responseBody = ResponseBody.create(MediaType.parse(""), expectedDescription)
-        doReturn(callMock).`when`(workLogWebServiceMock).getDescription(eq(intervalId))
+        doReturn(callMock).`when`(workLogWebServiceMock).getDescription(intervalId)
         doReturn(Response.success(responseBody)).`when`(callMock).execute()
 
         val actualDescription = WorkLogRetrofitGatewayAdapter(
@@ -83,6 +84,20 @@ class WorkLogRetrofitGatewayAdapterTest {
         ).getDescription(intervalId)
 
         assertEquals(expectedDescription, actualDescription)
+    }
+    
+    @Test
+    fun `Retrieves work log endpoints`() {
+        val intervalId = "id"
+        val workLogEndpointsDummy = mock<WorkLogIntervalEndpoints>()
+        doReturn(callMock).`when`(workLogWebServiceMock).getIntervalEndpoints(intervalId)
+        doReturn(Response.success(workLogEndpointsDummy)).`when`(callMock).execute()
+
+        val workLogEndpoints = WorkLogRetrofitGatewayAdapter(
+            "token", workLogWebServiceMock
+        ).getIntervalEndpoints(intervalId)
+
+        assertEquals(workLogEndpointsDummy, workLogEndpoints)
     }
 
     @Test

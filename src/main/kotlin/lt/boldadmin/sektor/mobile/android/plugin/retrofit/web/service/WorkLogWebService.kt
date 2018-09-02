@@ -1,5 +1,6 @@
 package lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service
 
+import lt.boldadmin.sektor.mobile.android.api.type.entity.WorkLogIntervalEndpoints
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -19,6 +20,9 @@ interface WorkLogWebService {
 
     @GET("/worklog/interval/{intervalId}/description")
     fun getDescription(@Path("intervalId") intervalId: String): Call<ResponseBody>
+
+    @GET("/worklog/interval/{intervalId}/endpoints")
+    fun getIntervalEndpoints(@Path("intervalId") intervalId: String): Call<WorkLogIntervalEndpoints>
 
     @GET("/worklog/interval/{intervalIds}/durations-sum")
     fun getDurationsSum(@Path("intervalIds") intervalIds: String): Call<Long>
