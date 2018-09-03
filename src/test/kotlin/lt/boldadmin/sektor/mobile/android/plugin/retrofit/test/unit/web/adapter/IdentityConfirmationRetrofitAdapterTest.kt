@@ -8,7 +8,7 @@ import lt.boldadmin.sektor.mobile.android.api.exception.CollaboratorNotFoundExce
 import lt.boldadmin.sektor.mobile.android.api.exception.IncorrectConfirmationCodeException
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.IdentityConfirmationRetrofitAdapter
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.IdentityConfirmationWebService
-import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -70,13 +70,11 @@ class IdentityConfirmationRetrofitAdapterTest {
         val confirmationCode = "123456"
         doReturn(callMock).`when`(webClientMock).confirmCode(eq(confirmationCode))
         doReturn(responseMock).`when`(callMock).execute()
-        doReturn("token").`when`(responseMock).body()
+        doReturn(CONFIRMATION_CODE).`when`(responseMock).body()
 
-        val token = gatewayAdapter.confirmCode(confirmationCode)
+        val code = gatewayAdapter.confirmCode(confirmationCode)
 
-        assertNotNull(token)
-        verify(webClientMock).confirmCode(same(confirmationCode))
-        verify(callMock).execute()
+        assertEquals(CONFIRMATION_CODE, code)
     }
 
     @Test
@@ -88,5 +86,9 @@ class IdentityConfirmationRetrofitAdapterTest {
         doReturn(401).`when`(responseMock).code()
 
         gatewayAdapter.confirmCode(confirmationCode)
+    }
+
+    companion object {
+        private val CONFIRMATION_CODE = "code"
     }
 }
