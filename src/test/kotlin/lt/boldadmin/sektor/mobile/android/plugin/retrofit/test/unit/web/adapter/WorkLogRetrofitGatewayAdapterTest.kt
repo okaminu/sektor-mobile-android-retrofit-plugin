@@ -9,15 +9,13 @@ import okhttp3.MediaType
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import okio.Buffer
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 import retrofit2.Call
 import retrofit2.Response
-
 
 @RunWith(MockitoJUnitRunner::class)
 class WorkLogRetrofitGatewayAdapterTest {
@@ -87,21 +85,21 @@ class WorkLogRetrofitGatewayAdapterTest {
     }
     
     @Test
-    fun `Retrieves work log endpoints`() {
+    fun `Retrieves work log interval endpoints`() {
         val intervalId = "id"
-        val workLogEndpointsDummy = mock<WorkLogIntervalEndpoints>()
+        val workLogIntervalEndpointsDummy = mock<WorkLogIntervalEndpoints>()
         doReturn(callMock).`when`(workLogWebServiceMock).getIntervalEndpoints(intervalId)
-        doReturn(Response.success(workLogEndpointsDummy)).`when`(callMock).execute()
+        doReturn(Response.success(workLogIntervalEndpointsDummy)).`when`(callMock).execute()
 
-        val workLogEndpoints = WorkLogRetrofitGatewayAdapter(
+        val workLogIntervalEndpoints = WorkLogRetrofitGatewayAdapter(
             "token", workLogWebServiceMock
         ).getIntervalEndpoints(intervalId)
 
-        assertEquals(workLogEndpointsDummy, workLogEndpoints)
+        assertSame(workLogIntervalEndpointsDummy, workLogIntervalEndpoints)
     }
 
     @Test
-    fun `Retrieves durations sums for several work logs`() {
+    fun `Retrieves work durations sum of several work logs`() {
         val intervalIds = listOf("id1", "id2")
         val expectedDurationsSum = 1000L
         doReturn(callMock).`when`(workLogWebServiceMock).getDurationsSum("id1,id2")
