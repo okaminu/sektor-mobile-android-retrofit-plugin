@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 interface StatusWebService {
 
-    @GET("/status")
-    fun getStatus(): Call<String>
+    @GET("/healthy")
+    fun isHealthy(): Call<Boolean>
 
 }

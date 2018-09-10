@@ -23,18 +23,18 @@ class StatusRetrofitGatewayAdapterTest {
 
     @Test
     fun `Gets backend status`() {
-        doReturn(callMock).`when`(statusWebServiceSpy).getStatus()
+        doReturn(callMock).`when`(statusWebServiceSpy).isHealthy()
         doReturn(Response.success(RESPONSE_STATUS)).`when`(callMock).execute()
 
         val status = StatusRetrofitGatewayAdapter(
             statusWebServiceSpy
-        ).status()
+        ).isHealthy()
 
         assertEquals(RESPONSE_STATUS, status)
     }
 
     companion object {
-        private val RESPONSE_STATUS = "OK"
+        private val RESPONSE_STATUS = true
     }
 
 }
