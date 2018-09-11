@@ -30,7 +30,7 @@ interface WorkLogWebService {
     @POST("/worklog/log-by-location")
     fun logByLocation(@Body gpsCoordinates: GpsCoordinates): Call<Void>
 
-    @POST("/worklog/update-description/{intervalId}")
+    @POST("/worklog/interval/{intervalId}/update-description")
     fun updateDescription(
         @Path("intervalId") intervalId: String,
         @Body descriptionBody: RequestBody
