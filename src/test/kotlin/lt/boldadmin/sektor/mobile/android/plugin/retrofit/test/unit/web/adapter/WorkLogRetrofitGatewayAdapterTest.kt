@@ -21,10 +21,10 @@ import retrofit2.Response
 class WorkLogRetrofitGatewayAdapterTest {
 
     @Mock
-    private lateinit var workLogWebServiceMock: WorkLogWebService
+    private lateinit var workLogWebServiceSpy: WorkLogWebService
 
     @Mock
-    private lateinit var callMock: Call<Void>
+    private lateinit var callSpy: Call<Void>
 
     @Mock
     private lateinit var responseMock: Response<Void>
@@ -32,11 +32,11 @@ class WorkLogRetrofitGatewayAdapterTest {
     @Test
     fun `Retrieves work log interval ids`() {
         val expectedIntervalIds = listOf("id1")
-        doReturn(callMock).`when`(workLogWebServiceMock).getIntervalIdsByCollaborator()
-        doReturn(Response.success(expectedIntervalIds)).`when`(callMock).execute()
+        doReturn(callSpy).`when`(workLogWebServiceSpy).getIntervalIdsByCollaborator()
+        doReturn(Response.success(expectedIntervalIds)).`when`(callSpy).execute()
 
         val actualIntervalIds = WorkLogRetrofitGatewayAdapter(
-            "token", workLogWebServiceMock
+            "token", workLogWebServiceSpy
         ).getIntervalIdsByCollaborator()
 
         assertEquals(expectedIntervalIds, actualIntervalIds)
@@ -47,11 +47,11 @@ class WorkLogRetrofitGatewayAdapterTest {
         val expectedProjectName = "ProjectName"
 
         val responseBody = ResponseBody.create(MediaType.parse(""), expectedProjectName)
-        doReturn(callMock).`when`(workLogWebServiceMock).getProjectNameOfStartedWork()
-        doReturn(Response.success(responseBody)).`when`(callMock).execute()
+        doReturn(callSpy).`when`(workLogWebServiceSpy).getProjectNameOfStartedWork()
+        doReturn(Response.success(responseBody)).`when`(callSpy).execute()
 
         val actualProjectName = WorkLogRetrofitGatewayAdapter(
-            "token", workLogWebServiceMock
+            "token", workLogWebServiceSpy
         ).getProjectNameOfStartedWork()
 
         assertEquals(expectedProjectName, actualProjectName)
@@ -59,11 +59,11 @@ class WorkLogRetrofitGatewayAdapterTest {
 
     @Test
     fun `Retrieves work status`() {
-        doReturn(callMock).`when`(workLogWebServiceMock).hasWorkStarted()
-        doReturn(Response.success(true)).`when`(callMock).execute()
+        doReturn(callSpy).`when`(workLogWebServiceSpy).hasWorkStarted()
+        doReturn(Response.success(true)).`when`(callSpy).execute()
 
         val workStatus = WorkLogRetrofitGatewayAdapter(
-            "token", workLogWebServiceMock
+            "token", workLogWebServiceSpy
         ).hasWorkStarted()
 
         assertTrue(workStatus)
@@ -74,11 +74,11 @@ class WorkLogRetrofitGatewayAdapterTest {
         val intervalId = "id"
         val expectedDescription = "description"
         val responseBody = ResponseBody.create(MediaType.parse(""), expectedDescription)
-        doReturn(callMock).`when`(workLogWebServiceMock).getDescription(intervalId)
-        doReturn(Response.success(responseBody)).`when`(callMock).execute()
+        doReturn(callSpy).`when`(workLogWebServiceSpy).getDescription(intervalId)
+        doReturn(Response.success(responseBody)).`when`(callSpy).execute()
 
         val actualDescription = WorkLogRetrofitGatewayAdapter(
-            "token", workLogWebServiceMock
+            "token", workLogWebServiceSpy
         ).getDescription(intervalId)
 
         assertEquals(expectedDescription, actualDescription)
@@ -88,11 +88,11 @@ class WorkLogRetrofitGatewayAdapterTest {
     fun `Retrieves work log interval endpoints`() {
         val intervalId = "id"
         val workLogIntervalEndpointsDummy = mock<WorkLogIntervalEndpoints>()
-        doReturn(callMock).`when`(workLogWebServiceMock).getIntervalEndpoints(intervalId)
-        doReturn(Response.success(workLogIntervalEndpointsDummy)).`when`(callMock).execute()
+        doReturn(callSpy).`when`(workLogWebServiceSpy).getIntervalEndpoints(intervalId)
+        doReturn(Response.success(workLogIntervalEndpointsDummy)).`when`(callSpy).execute()
 
         val workLogIntervalEndpoints = WorkLogRetrofitGatewayAdapter(
-            "token", workLogWebServiceMock
+            "token", workLogWebServiceSpy
         ).getIntervalEndpoints(intervalId)
 
         assertSame(workLogIntervalEndpointsDummy, workLogIntervalEndpoints)
@@ -102,11 +102,11 @@ class WorkLogRetrofitGatewayAdapterTest {
     fun `Retrieves work durations sum of several work logs`() {
         val intervalIds = listOf("id1", "id2")
         val expectedDurationsSum = 1000L
-        doReturn(callMock).`when`(workLogWebServiceMock).getDurationsSum("id1,id2")
-        doReturn(Response.success(expectedDurationsSum)).`when`(callMock).execute()
+        doReturn(callSpy).`when`(workLogWebServiceSpy).getDurationsSum("id1,id2")
+        doReturn(Response.success(expectedDurationsSum)).`when`(callSpy).execute()
 
         val actualDurationsSum = WorkLogRetrofitGatewayAdapter(
-            "token", workLogWebServiceMock
+            "token", workLogWebServiceSpy
         ).getDurationsSum(intervalIds)
 
         assertEquals(expectedDurationsSum, actualDurationsSum)
@@ -115,34 +115,34 @@ class WorkLogRetrofitGatewayAdapterTest {
     @Test
     fun `Logs work by location using Retrofit`() {
         val locationMock = GpsCoordinates(15.0, 20.0)
-        doReturn(callMock).`when`(workLogWebServiceMock).logByLocation(eq(locationMock))
-        doReturn(responseMock).`when`(callMock).execute()
+        doReturn(callSpy).`when`(workLogWebServiceSpy).logByLocation(eq(locationMock))
+        doReturn(responseMock).`when`(callSpy).execute()
 
         WorkLogRetrofitGatewayAdapter(
-            "token", workLogWebServiceMock
+            "token", workLogWebServiceSpy
         ).logByLocation(locationMock)
 
-        verify(workLogWebServiceMock).logByLocation(same(locationMock))
-        verify(callMock).execute()
+        verify(workLogWebServiceSpy).logByLocation(same(locationMock))
+        verify(callSpy).execute()
     }
 
     @Test
     fun `Updates work log description`() {
         val intervalId = "intervalId"
         val description = "description"
-        doReturn(callMock)
-            .`when`(workLogWebServiceMock)
+        doReturn(callSpy)
+            .`when`(workLogWebServiceSpy)
             .updateDescription(eq(intervalId), any())
 
-        doReturn(responseMock).`when`(callMock).execute()
+        doReturn(responseMock).`when`(callSpy).execute()
 
         WorkLogRetrofitGatewayAdapter(
-            "token", workLogWebServiceMock
+            "token", workLogWebServiceSpy
         ).updateDescription(intervalId, description)
 
         argumentCaptor<RequestBody>().apply {
-            verify(workLogWebServiceMock).updateDescription(eq(intervalId), capture())
-            verify(callMock).execute()
+            verify(workLogWebServiceSpy).updateDescription(eq(intervalId), capture())
+            verify(callSpy).execute()
 
             Buffer().also {
                 firstValue.writeTo(it)
