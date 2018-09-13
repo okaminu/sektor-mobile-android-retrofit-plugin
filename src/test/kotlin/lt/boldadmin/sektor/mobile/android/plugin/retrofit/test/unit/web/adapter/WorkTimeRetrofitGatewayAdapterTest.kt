@@ -16,7 +16,7 @@ import retrofit2.Response
 class WorkTimeRetrofitGatewayAdapterTest {
 
     @Mock
-    private lateinit var workTimeWebServiceMock: WorkTimeWebService
+    private lateinit var workTimeWebServiceStub: WorkTimeWebService
 
     @Mock
     private lateinit var callMock: Call<WorkTime>
@@ -25,11 +25,11 @@ class WorkTimeRetrofitGatewayAdapterTest {
     fun `Gets work time`() {
         val workTimeRetrofitGatewayAdapter =
             WorkTimeRetrofitGatewayAdapter(
-                "token", workTimeWebServiceMock
+                "token", workTimeWebServiceStub
             )
         val workTimeMock = WorkTime()
         val responseMock = Response.success(WorkTime())
-        doReturn(callMock).`when`(workTimeWebServiceMock).getWorkTime()
+        doReturn(callMock).`when`(workTimeWebServiceStub).getWorkTime()
         doReturn(responseMock).`when`(callMock).execute()
 
         val workTime = workTimeRetrofitGatewayAdapter.getWorkTime()

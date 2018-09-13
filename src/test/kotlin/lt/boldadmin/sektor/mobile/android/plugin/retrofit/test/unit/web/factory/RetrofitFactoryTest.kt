@@ -22,16 +22,16 @@ import java.util.*
 class RetrofitFactoryTest {
 
     @Mock
-    private lateinit var retrofitBuilderMock: Builder
+    private lateinit var retrofitBuilderSpy: Builder
 
     @Mock
-    private lateinit var propertyLoaderMock: PropertyLoader
+    private lateinit var propertyLoaderSpy: PropertyLoader
 
     @Mock
-    private lateinit var okHttpClientMock: OkHttpClient
+    private lateinit var okHttpClientSpy: OkHttpClient
 
     @Mock
-    private lateinit var okHttpBuilderMock: OkHttpClient.Builder
+    private lateinit var okHttpBuilderSpy: OkHttpClient.Builder
 
     private lateinit var retrofitFactory: RetrofitFactory
 
@@ -39,7 +39,7 @@ class RetrofitFactoryTest {
     fun `Set up`() {
         mockOkHttpClientBuilder()
         retrofitFactory = RetrofitFactory(
-            propertyLoaderMock, retrofitBuilderMock, okHttpClientMock
+            propertyLoaderSpy, retrofitBuilderSpy, okHttpClientSpy
         )
     }
 
@@ -51,12 +51,12 @@ class RetrofitFactoryTest {
         retrofitFactory.create(WorkTimeWebService::class.java)
 
         verifyOkHttpBuilderMock()
-        verify(okHttpClientMock, never()).interceptors()
-        verify(retrofitBuilderMock).client(okHttpClientMock)
-        verify(retrofitBuilderMock).addConverterFactory(any())
-        verify(retrofitBuilderMock).baseUrl(any<String>())
-        verify(retrofitBuilderMock).build()
-        verify(propertyLoaderMock, times(2)).load(any())
+        verify(okHttpClientSpy, never()).interceptors()
+        verify(retrofitBuilderSpy).client(okHttpClientSpy)
+        verify(retrofitBuilderSpy).addConverterFactory(any())
+        verify(retrofitBuilderSpy).baseUrl(any<String>())
+        verify(retrofitBuilderSpy).build()
+        verify(propertyLoaderSpy, times(2)).load(any())
         assertNotNull(retrofitFactory)
     }
 
@@ -65,47 +65,47 @@ class RetrofitFactoryTest {
         val interceptorsMock = mock<ArrayList<Interceptor>>()
         mockRetrofitBuilder()
         mockOkHttpClientBuilder()
-        doReturn(interceptorsMock).`when`(okHttpBuilderMock).interceptors()
+        doReturn(interceptorsMock).`when`(okHttpBuilderSpy).interceptors()
         doReturn(true).`when`(interceptorsMock).add(any())
 
         retrofitFactory.create(WorkTimeWebService::class.java, "token")
 
         verifyOkHttpBuilderMock()
-        verify(okHttpBuilderMock).interceptors()
+        verify(okHttpBuilderSpy).interceptors()
         verify(interceptorsMock).add(any<AuthenticationInterceptor>())
-        verify(retrofitBuilderMock).client(okHttpClientMock)
-        verify(retrofitBuilderMock).addConverterFactory(any())
-        verify(retrofitBuilderMock).baseUrl(any<String>())
-        verify(retrofitBuilderMock).build()
-        verify(propertyLoaderMock, times(2)).load(any())
+        verify(retrofitBuilderSpy).client(okHttpClientSpy)
+        verify(retrofitBuilderSpy).addConverterFactory(any())
+        verify(retrofitBuilderSpy).baseUrl(any<String>())
+        verify(retrofitBuilderSpy).build()
+        verify(propertyLoaderSpy, times(2)).load(any())
         assertNotNull(retrofitFactory)
     }
 
     private fun mockOkHttpClientBuilder() {
         val propertyMock = mock<Properties>()
         doReturn(10).`when`(propertyMock)[any()]
-        doReturn(propertyMock).`when`(propertyLoaderMock).load(eq("timeout.properties"))
-        doReturn(okHttpBuilderMock).`when`(okHttpClientMock).newBuilder()
-        doReturn(okHttpBuilderMock).`when`(okHttpBuilderMock).readTimeout(any(), any())
-        doReturn(okHttpBuilderMock).`when`(okHttpBuilderMock).writeTimeout(any(), any())
-        doReturn(okHttpBuilderMock).`when`(okHttpBuilderMock).connectTimeout(any(), any())
-        doReturn(okHttpClientMock).`when`(okHttpBuilderMock).build()
+        doReturn(propertyMock).`when`(propertyLoaderSpy).load(eq("timeout.properties"))
+        doReturn(okHttpBuilderSpy).`when`(okHttpClientSpy).newBuilder()
+        doReturn(okHttpBuilderSpy).`when`(okHttpBuilderSpy).readTimeout(any(), any())
+        doReturn(okHttpBuilderSpy).`when`(okHttpBuilderSpy).writeTimeout(any(), any())
+        doReturn(okHttpBuilderSpy).`when`(okHttpBuilderSpy).connectTimeout(any(), any())
+        doReturn(okHttpClientSpy).`when`(okHttpBuilderSpy).build()
     }
 
     private fun mockRetrofitBuilder() {
         val retrofitMock = mock<Retrofit>()
-        doReturn(retrofitMock).`when`(retrofitBuilderMock).build()
+        doReturn(retrofitMock).`when`(retrofitBuilderSpy).build()
         val propertyMock = mock<Properties>()
         doReturn("URL").`when`(propertyMock)[any()]
-        doReturn(propertyMock).`when`(propertyLoaderMock).load(eq("config.properties"))
-        doReturn(retrofitBuilderMock).`when`(retrofitBuilderMock).addConverterFactory(any())
-        doReturn(retrofitBuilderMock).`when`(retrofitBuilderMock).baseUrl(any<String>())
+        doReturn(propertyMock).`when`(propertyLoaderSpy).load(eq("config.properties"))
+        doReturn(retrofitBuilderSpy).`when`(retrofitBuilderSpy).addConverterFactory(any())
+        doReturn(retrofitBuilderSpy).`when`(retrofitBuilderSpy).baseUrl(any<String>())
     }
 
     private fun verifyOkHttpBuilderMock() {
-        verify(okHttpClientMock).newBuilder()
-        verify(okHttpBuilderMock).readTimeout(any(), any())
-        verify(okHttpBuilderMock).writeTimeout(any(), any())
-        verify(okHttpBuilderMock).connectTimeout(any(), any())
+        verify(okHttpClientSpy).newBuilder()
+        verify(okHttpBuilderSpy).readTimeout(any(), any())
+        verify(okHttpBuilderSpy).writeTimeout(any(), any())
+        verify(okHttpBuilderSpy).connectTimeout(any(), any())
     }
 }

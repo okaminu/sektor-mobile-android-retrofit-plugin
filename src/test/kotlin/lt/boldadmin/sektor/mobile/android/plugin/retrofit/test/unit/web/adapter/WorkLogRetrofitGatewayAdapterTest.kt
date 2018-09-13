@@ -27,7 +27,7 @@ class WorkLogRetrofitGatewayAdapterTest {
     private lateinit var callSpy: Call<Void>
 
     @Mock
-    private lateinit var responseMock: Response<Void>
+    private lateinit var responseDummy: Response<Void>
 
     @Test
     fun `Retrieves work log interval ids`() {
@@ -116,7 +116,7 @@ class WorkLogRetrofitGatewayAdapterTest {
     fun `Logs work by location using Retrofit`() {
         val locationMock = GpsCoordinates(15.0, 20.0)
         doReturn(callSpy).`when`(workLogWebServiceSpy).logByLocation(eq(locationMock))
-        doReturn(responseMock).`when`(callSpy).execute()
+        doReturn(responseDummy).`when`(callSpy).execute()
 
         WorkLogRetrofitGatewayAdapter(
             "token", workLogWebServiceSpy
@@ -134,7 +134,7 @@ class WorkLogRetrofitGatewayAdapterTest {
             .`when`(workLogWebServiceSpy)
             .updateDescription(eq(intervalId), any())
 
-        doReturn(responseMock).`when`(callSpy).execute()
+        doReturn(responseDummy).`when`(callSpy).execute()
 
         WorkLogRetrofitGatewayAdapter(
             "token", workLogWebServiceSpy

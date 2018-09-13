@@ -13,23 +13,23 @@ class AuthenticationInterceptorTest {
 
     @Test
     fun `Adds authentication token to header`() {
-        val chainMock = mock<Chain>()
-        val chainRequestMock = mock<Request>()
-        val okHttpBuilderMock = mock<Builder>()
-        doReturn(chainRequestMock).`when`(chainMock).request()
-        doReturn(okHttpBuilderMock).`when`(chainRequestMock).newBuilder()
-        doReturn(okHttpBuilderMock).`when`(okHttpBuilderMock).header(any(), any())
-        doReturn(mock<Request>()).`when`(okHttpBuilderMock).build()
-        doReturn(mock<Response>()).`when`(chainMock).proceed(any())
+        val chainSpy: Chain = mock()
+        val chainRequestSpy: Request = mock()
+        val okHttpBuilderSpy: Builder = mock()
+        doReturn(chainRequestSpy).`when`(chainSpy).request()
+        doReturn(okHttpBuilderSpy).`when`(chainRequestSpy).newBuilder()
+        doReturn(okHttpBuilderSpy).`when`(okHttpBuilderSpy).header(any(), any())
+        doReturn(mock<Request>()).`when`(okHttpBuilderSpy).build()
+        doReturn(mock<Response>()).`when`(chainSpy).proceed(any())
 
         val response = AuthenticationInterceptor("token")
-            .intercept(chainMock)
+            .intercept(chainSpy)
 
         assertNotNull(response)
-        verify(chainMock).request()
-        verify(chainRequestMock).newBuilder()
-        verify(okHttpBuilderMock).header(any(), eq("token"))
-        verify(okHttpBuilderMock).build()
-        verify(chainMock).proceed(any())
+        verify(chainSpy).request()
+        verify(chainRequestSpy).newBuilder()
+        verify(okHttpBuilderSpy).header(any(), eq("token"))
+        verify(okHttpBuilderSpy).build()
+        verify(chainSpy).proceed(any())
     }
 }
