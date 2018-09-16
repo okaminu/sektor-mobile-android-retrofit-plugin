@@ -16,25 +16,21 @@ import retrofit2.Response
 class StatusRetrofitGatewayAdapterTest {
 
     @Mock
-    private lateinit var statusWebServiceSpy: StatusWebService
+    private lateinit var statusWebServiceStub: StatusWebService
 
     @Mock
-    private lateinit var callMock: Call<String>
+    private lateinit var callStub: Call<String>
 
     @Test
     fun `Gets backend status`() {
-        doReturn(callMock).`when`(statusWebServiceSpy).isHealthy()
-        doReturn(Response.success(RESPONSE_STATUS)).`when`(callMock).execute()
+        doReturn(callStub).`when`(statusWebServiceStub).isHealthy()
+        doReturn(Response.success(true)).`when`(callStub).execute()
 
         val status = StatusRetrofitGatewayAdapter(
-            statusWebServiceSpy
+            statusWebServiceStub
         ).isHealthy()
 
-        assertEquals(RESPONSE_STATUS, status)
-    }
-
-    companion object {
-        private val RESPONSE_STATUS = true
+        assertEquals(true, status)
     }
 
 }

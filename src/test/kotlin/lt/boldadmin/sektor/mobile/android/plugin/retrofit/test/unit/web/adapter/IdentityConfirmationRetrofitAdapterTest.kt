@@ -22,11 +22,11 @@ import retrofit2.Response
 @RunWith(MockitoJUnitRunner::class)
 class IdentityConfirmationRetrofitAdapterTest {
 
-    @Mock private lateinit var webClientMock: IdentityConfirmationWebService
+    @Mock private lateinit var webClientStub: IdentityConfirmationWebService
 
-    @Mock private lateinit var callMock: Call<Void>
+    @Mock private lateinit var callStub: Call<Void>
 
-    @Mock private lateinit var responseMock: Response<Void>
+    @Mock private lateinit var responseStub: Response<Void>
 
     @Rule
     @JvmField
@@ -38,29 +38,29 @@ class IdentityConfirmationRetrofitAdapterTest {
     fun setUp() {
         gatewayAdapter =
             IdentityConfirmationRetrofitAdapter(
-                webClientMock
+                webClientStub
             )
     }
 
     @Test
     fun `Requests confirmation code`() {
         val mobileNumber = "+37066666666"
-        doReturn(callMock).`when`(webClientMock).requestCode(eq(mobileNumber))
-        doReturn(responseMock).`when`(callMock).execute()
+        doReturn(callStub).`when`(webClientStub).requestCode(eq(mobileNumber))
+        doReturn(responseStub).`when`(callStub).execute()
 
         gatewayAdapter.requestCode(mobileNumber)
 
-        verify(webClientMock).requestCode(same(mobileNumber))
-        verify(callMock).execute()
+        verify(webClientStub).requestCode(same(mobileNumber))
+        verify(callStub).execute()
     }
 
     @Test
     fun `Throws error when Collaborator by provided mobile number is not found`() {
         val mobileNumber = "+37066666666"
         expectedException.expect(CollaboratorNotFoundException::class.java)
-        doReturn(callMock).`when`(webClientMock).requestCode(eq(mobileNumber))
-        doReturn(responseMock).`when`(callMock).execute()
-        doReturn(404).`when`(responseMock).code()
+        doReturn(callStub).`when`(webClientStub).requestCode(eq(mobileNumber))
+        doReturn(responseStub).`when`(callStub).execute()
+        doReturn(404).`when`(responseStub).code()
 
         gatewayAdapter.requestCode(mobileNumber)
     }
@@ -68,9 +68,9 @@ class IdentityConfirmationRetrofitAdapterTest {
     @Test
     fun `Confirms received code`() {
         val confirmationCode = "123456"
-        doReturn(callMock).`when`(webClientMock).confirmCode(eq(confirmationCode))
-        doReturn(responseMock).`when`(callMock).execute()
-        doReturn(CONFIRMATION_CODE).`when`(responseMock).body()
+        doReturn(callStub).`when`(webClientStub).confirmCode(eq(confirmationCode))
+        doReturn(responseStub).`when`(callStub).execute()
+        doReturn(CONFIRMATION_CODE).`when`(responseStub).body()
 
         val code = gatewayAdapter.confirmCode(confirmationCode)
 
@@ -81,9 +81,9 @@ class IdentityConfirmationRetrofitAdapterTest {
     fun `Throws error when confirmation code is incorrect`() {
         val confirmationCode = "123456"
         expectedException.expect(IncorrectConfirmationCodeException::class.java)
-        doReturn(callMock).`when`(webClientMock).confirmCode(eq(confirmationCode))
-        doReturn(responseMock).`when`(callMock).execute()
-        doReturn(401).`when`(responseMock).code()
+        doReturn(callStub).`when`(webClientStub).confirmCode(eq(confirmationCode))
+        doReturn(responseStub).`when`(callStub).execute()
+        doReturn(401).`when`(responseStub).code()
 
         gatewayAdapter.confirmCode(confirmationCode)
     }

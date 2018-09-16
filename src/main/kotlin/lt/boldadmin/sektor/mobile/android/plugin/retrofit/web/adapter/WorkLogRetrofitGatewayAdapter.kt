@@ -9,16 +9,13 @@ import okhttp3.MediaType
 import okhttp3.RequestBody
 
 class WorkLogRetrofitGatewayAdapter(
-    token: String, private val webClient: WorkLogWebService = RetrofitFactory().create(
-        WorkLogWebService::class.java, token)
-) : WorkLogGateway {
+    token: String,
+    private val webClient: WorkLogWebService = RetrofitFactory().create(WorkLogWebService::class.java, token)
+): WorkLogGateway {
 
     override fun getIntervalIdsByCollaborator(): List<String> = webClient.getIntervalIdsByCollaborator().execute().body()
 
-    override fun getProjectNameOfStartedWork(): String = webClient.getProjectNameOfStartedWork()
-        .execute()
-        .body()
-        .string()
+    override fun getProjectNameOfStartedWork(): String = webClient.getProjectNameOfStartedWork().execute().body().string()
 
     override fun hasWorkStarted(): Boolean = webClient.hasWorkStarted().execute().body()
 

@@ -5,9 +5,7 @@ import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.factory.RetrofitFa
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.StatusWebService
 
 class StatusRetrofitGatewayAdapter(
-    private val statusService: StatusWebService = RetrofitFactory().create(
-        StatusWebService::class.java
-    )
+    private val statusService: StatusWebService = RetrofitFactory().create(StatusWebService::class.java)
 ): StatusGateway {
 
     override fun isHealthy(): Boolean = statusService.isHealthy().execute().body()
