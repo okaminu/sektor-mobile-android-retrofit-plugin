@@ -1,8 +1,8 @@
 package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.adapter
 
 import com.nhaarman.mockito_kotlin.doReturn
-import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.ConnectivityRetrofitGatewayAdapter
-import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.ConnectivityWebService
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.ConnectionStatusRetrofitGatewayAdapter
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.ConnectionStatusWebService
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -13,21 +13,21 @@ import retrofit2.Response
 
 
 @RunWith(MockitoJUnitRunner::class)
-class ConnectivityRetrofitGatewayAdapterTest {
+class ConnectionStatusRetrofitGatewayAdapterTest {
 
     @Mock
-    private lateinit var connectivityWebServiceStub: ConnectivityWebService
+    private lateinit var connectionStatusWebServiceStub: ConnectionStatusWebService
 
     @Mock
     private lateinit var callStub: Call<String>
 
     @Test
-    fun `Request backend health state`() {
-        doReturn(callStub).`when`(connectivityWebServiceStub).isHealthy()
+    fun `Request backend health status`() {
+        doReturn(callStub).`when`(connectionStatusWebServiceStub).isHealthy()
         doReturn(Response.success(true)).`when`(callStub).execute()
 
-        val status = ConnectivityRetrofitGatewayAdapter(
-            connectivityWebServiceStub
+        val status = ConnectionStatusRetrofitGatewayAdapter(
+            connectionStatusWebServiceStub
         ).isHealthy()
 
         assertEquals(true, status)
