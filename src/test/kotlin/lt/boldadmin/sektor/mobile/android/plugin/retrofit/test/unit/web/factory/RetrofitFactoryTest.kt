@@ -38,9 +38,7 @@ class RetrofitFactoryTest {
     @Before
     fun `Set up`() {
         mockOkHttpClientBuilder()
-        retrofitFactory = RetrofitFactory(
-            propertyLoaderSpy, retrofitBuilderSpy, okHttpClientSpy
-        )
+        retrofitFactory = RetrofitFactory(propertyLoaderSpy, retrofitBuilderSpy, okHttpClientSpy)
     }
 
     @Test

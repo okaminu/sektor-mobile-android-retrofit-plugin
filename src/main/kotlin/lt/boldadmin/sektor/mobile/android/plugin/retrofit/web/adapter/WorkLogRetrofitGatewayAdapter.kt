@@ -13,16 +13,19 @@ class WorkLogRetrofitGatewayAdapter(
     private val webClient: WorkLogWebService = RetrofitFactory().create(WorkLogWebService::class.java, token)
 ): WorkLogGateway {
 
-    override fun getIntervalIdsByCollaborator(): Collection<String> = webClient.getIntervalIdsByCollaborator().execute().body()
+    override fun getIntervalIdsByCollaborator(): Collection<String> =
+        webClient.getIntervalIdsByCollaborator().execute().body()
 
-    override fun getProjectNameOfStartedWork(): String = webClient.getProjectNameOfStartedWork().execute().body().string()
+    override fun getProjectNameOfStartedWork(): String =
+        webClient.getProjectNameOfStartedWork().execute().body().string()
 
     override fun hasWorkStarted(): Boolean = webClient.hasWorkStarted().execute().body()
 
     override fun getIntervalEndpoints(intervalId: String): WorkLogIntervalEndpoints =
         webClient.getIntervalEndpoints(intervalId).execute().body()
 
-    override fun getDescription(intervalId: String): String = webClient.getDescription(intervalId).execute().body().string()
+    override fun getDescription(intervalId: String): String =
+        webClient.getDescription(intervalId).execute().body().string()
 
     override fun getDurationsSum(intervalIds: Collection<String>): Long =
         webClient.getDurationsSum(intervalIds.joinToString(",")).execute().body()
