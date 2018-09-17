@@ -13,7 +13,7 @@ class WorkLogRetrofitGatewayAdapter(
     private val webClient: WorkLogWebService = RetrofitFactory().create(WorkLogWebService::class.java, token)
 ): WorkLogGateway {
 
-    override fun getIntervalIdsByCollaborator(): List<String> = webClient.getIntervalIdsByCollaborator().execute().body()
+    override fun getIntervalIdsByCollaborator(): Collection<String> = webClient.getIntervalIdsByCollaborator().execute().body()
 
     override fun getProjectNameOfStartedWork(): String = webClient.getProjectNameOfStartedWork().execute().body().string()
 
