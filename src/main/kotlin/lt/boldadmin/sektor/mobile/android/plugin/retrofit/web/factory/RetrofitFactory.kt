@@ -16,11 +16,11 @@ class RetrofitFactory(
     private val okHttpClient: OkHttpClient = OkHttpClient()
 ) {
 
-    fun <S> create(serviceClass: Class<S>): S {
+    internal fun <S> create(serviceClass: Class<S>): S {
         return build(defaultOkHttpClientBuilder()).create(serviceClass)
     }
 
-    fun <S> create(serviceClass: Class<S>, authToken: String): S {
+    internal fun <S> create(serviceClass: Class<S>, authToken: String): S {
         return build(defaultOkHttpClientBuilder(), authToken).create(serviceClass)
     }
 
