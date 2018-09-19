@@ -5,7 +5,8 @@ import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.factory.RetrofitFa
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.ConnectionStatusWebService
 
 class ConnectionStatusRetrofitGatewayAdapter(
-    private val connectionStatusService: ConnectionStatusWebService = RetrofitFactory().create(ConnectionStatusWebService::class.java)
+    private val connectionStatusService: ConnectionStatusWebService =
+        RetrofitFactory().create(ConnectionStatusWebService::class.java)
 ): ConnectionStatusGateway {
 
     override fun isHealthy(): Boolean = connectionStatusService.isHealthy().execute().body()

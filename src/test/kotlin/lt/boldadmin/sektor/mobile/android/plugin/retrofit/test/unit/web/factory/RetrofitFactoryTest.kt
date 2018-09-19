@@ -60,17 +60,17 @@ class RetrofitFactoryTest {
 
     @Test
     fun `Gets Retrofit service with token`() {
-        val interceptorsMock = mock<ArrayList<Interceptor>>()
+        val interceptorsSpy: ArrayList<Interceptor> = mock()
         mockRetrofitBuilder()
         mockOkHttpClientBuilder()
-        doReturn(interceptorsMock).`when`(okHttpBuilderSpy).interceptors()
-        doReturn(true).`when`(interceptorsMock).add(any())
+        doReturn(interceptorsSpy).`when`(okHttpBuilderSpy).interceptors()
+        doReturn(true).`when`(interceptorsSpy).add(any())
 
         retrofitFactory.create(WorkTimeWebService::class.java, "token")
 
         verifyOkHttpBuilderMock()
         verify(okHttpBuilderSpy).interceptors()
-        verify(interceptorsMock).add(any<AuthenticationInterceptor>())
+        verify(interceptorsSpy).add(any<AuthenticationInterceptor>())
         verify(retrofitBuilderSpy).client(okHttpClientSpy)
         verify(retrofitBuilderSpy).addConverterFactory(any())
         verify(retrofitBuilderSpy).baseUrl(any<String>())
@@ -80,9 +80,9 @@ class RetrofitFactoryTest {
     }
 
     private fun mockOkHttpClientBuilder() {
-        val propertyMock = mock<Properties>()
-        doReturn(10).`when`(propertyMock)[any()]
-        doReturn(propertyMock).`when`(propertyLoaderSpy).load(eq("timeout.properties"))
+        val propertyStub: Properties = mock()
+        doReturn(10).`when`(propertyStub)[any()]
+        doReturn(propertyStub).`when`(propertyLoaderSpy).load(eq("timeout.properties"))
         doReturn(okHttpBuilderSpy).`when`(okHttpClientSpy).newBuilder()
         doReturn(okHttpBuilderSpy).`when`(okHttpBuilderSpy).readTimeout(any(), any())
         doReturn(okHttpBuilderSpy).`when`(okHttpBuilderSpy).writeTimeout(any(), any())
@@ -91,11 +91,11 @@ class RetrofitFactoryTest {
     }
 
     private fun mockRetrofitBuilder() {
-        val retrofitMock = mock<Retrofit>()
-        doReturn(retrofitMock).`when`(retrofitBuilderSpy).build()
-        val propertyMock = mock<Properties>()
-        doReturn("URL").`when`(propertyMock)[any()]
-        doReturn(propertyMock).`when`(propertyLoaderSpy).load(eq("config.properties"))
+        val retrofitDummy: Retrofit = mock()
+        doReturn(retrofitDummy).`when`(retrofitBuilderSpy).build()
+        val propertyStub: Properties = mock()
+        doReturn("URL").`when`(propertyStub)[any()]
+        doReturn(propertyStub).`when`(propertyLoaderSpy).load(eq("config.properties"))
         doReturn(retrofitBuilderSpy).`when`(retrofitBuilderSpy).addConverterFactory(any())
         doReturn(retrofitBuilderSpy).`when`(retrofitBuilderSpy).baseUrl(any<String>())
     }

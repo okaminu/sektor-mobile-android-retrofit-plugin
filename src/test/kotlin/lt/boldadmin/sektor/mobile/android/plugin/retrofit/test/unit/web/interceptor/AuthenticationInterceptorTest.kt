@@ -22,8 +22,7 @@ class AuthenticationInterceptorTest {
         doReturn(mock<Request>()).`when`(okHttpBuilderSpy).build()
         doReturn(mock<Response>()).`when`(chainSpy).proceed(any())
 
-        val response = AuthenticationInterceptor("token")
-            .intercept(chainSpy)
+        val response = AuthenticationInterceptor("token").intercept(chainSpy)
 
         assertNotNull(response)
         verify(chainSpy).request()

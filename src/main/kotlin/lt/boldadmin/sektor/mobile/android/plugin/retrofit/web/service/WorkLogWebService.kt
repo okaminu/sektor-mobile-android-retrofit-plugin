@@ -10,7 +10,7 @@ import retrofit2.http.*
 interface WorkLogWebService {
 
     @GET("/worklog/collaborator/interval-ids")
-    fun getIntervalIdsByCollaborator(): Call<List<String>>
+    fun getIntervalIdsByCollaborator(): Call<Collection<String>>
 
     @GET("/worklog/project-name-of-started-work")
     fun getProjectNameOfStartedWork(): Call<ResponseBody>
