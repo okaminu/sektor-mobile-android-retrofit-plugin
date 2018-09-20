@@ -7,18 +7,18 @@ import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.factory.RetrofitFa
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.IdentityConfirmationWebService
 
 class IdentityConfirmationRetrofitAdapter(
-    private val webClient: IdentityConfirmationWebService = RetrofitFactory()
+    private val webService: IdentityConfirmationWebService = RetrofitFactory()
         .create(IdentityConfirmationWebService::class.java)
 ) : IdentityConfirmationGateway {
 
     override fun requestCode(mobileNumber: String) {
-        val response = webClient.requestCode(mobileNumber).execute()
+        val response = webService.requestCode(mobileNumber).execute()
         if (response.code() == 404)
             throw CollaboratorNotFoundException()
     }
 
     override fun confirmCode(confirmationCode: String): String {
-        val response = webClient.confirmCode(confirmationCode).execute()
+        val response = webService.confirmCode(confirmationCode).execute()
         if (response.code() == 401)
             throw IncorrectConfirmationCodeException()
         return response.body()
