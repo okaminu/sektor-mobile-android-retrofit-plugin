@@ -16,18 +16,18 @@ import retrofit2.Response
 class ConnectionStatusRetrofitGatewayAdapterTest {
 
     @Mock
-    private lateinit var connectionStatusWebServiceStub: ConnectionStatusWebService
+    private lateinit var webServiceStub: ConnectionStatusWebService
 
     @Mock
     private lateinit var callStub: Call<String>
 
     @Test
     fun `Request backend health status`() {
-        doReturn(callStub).`when`(connectionStatusWebServiceStub).isHealthy()
+        doReturn(callStub).`when`(webServiceStub).isHealthy()
         doReturn(Response.success(true)).`when`(callStub).execute()
 
         val status = ConnectionStatusRetrofitGatewayAdapter(
-            connectionStatusWebServiceStub
+            webServiceStub
         ).isHealthy()
 
         assertEquals(true, status)
