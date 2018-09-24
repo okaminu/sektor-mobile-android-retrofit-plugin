@@ -22,7 +22,7 @@ import retrofit2.Response
 @RunWith(MockitoJUnitRunner::class)
 class IdentityConfirmationRetrofitAdapterTest {
 
-    @Mock private lateinit var webServiceStub: IdentityConfirmationWebService
+    @Mock private lateinit var webServiceSpy: IdentityConfirmationWebService
 
     @Mock private lateinit var callStub: Call<Void>
 
@@ -38,19 +38,19 @@ class IdentityConfirmationRetrofitAdapterTest {
     fun setUp() {
         gatewayAdapter =
             IdentityConfirmationRetrofitAdapter(
-                webServiceStub
+                webServiceSpy
             )
     }
 
     @Test
     fun `Requests confirmation code`() {
         val mobileNumber = "+37066666666"
-        doReturn(callStub).`when`(webServiceStub).requestCode(eq(mobileNumber))
+        doReturn(callStub).`when`(webServiceSpy).requestCode(eq(mobileNumber))
         doReturn(responseStub).`when`(callStub).execute()
 
         gatewayAdapter.requestCode(mobileNumber)
 
-        verify(webServiceStub).requestCode(same(mobileNumber))
+        verify(webServiceSpy).requestCode(same(mobileNumber))
         verify(callStub).execute()
     }
 
@@ -58,7 +58,7 @@ class IdentityConfirmationRetrofitAdapterTest {
     fun `Throws error when Collaborator by provided mobile number is not found`() {
         val mobileNumber = "+37066666666"
         expectedException.expect(CollaboratorNotFoundException::class.java)
-        doReturn(callStub).`when`(webServiceStub).requestCode(eq(mobileNumber))
+        doReturn(callStub).`when`(webServiceSpy).requestCode(eq(mobileNumber))
         doReturn(responseStub).`when`(callStub).execute()
         doReturn(404).`when`(responseStub).code()
 
@@ -68,7 +68,7 @@ class IdentityConfirmationRetrofitAdapterTest {
     @Test
     fun `Confirms received code`() {
         val confirmationCode = "123456"
-        doReturn(callStub).`when`(webServiceStub).confirmCode(eq(confirmationCode))
+        doReturn(callStub).`when`(webServiceSpy).confirmCode(eq(confirmationCode))
         doReturn(responseStub).`when`(callStub).execute()
         doReturn(CONFIRMATION_CODE).`when`(responseStub).body()
 
@@ -81,7 +81,7 @@ class IdentityConfirmationRetrofitAdapterTest {
     fun `Throws error when confirmation code is incorrect`() {
         val confirmationCode = "123456"
         expectedException.expect(IncorrectConfirmationCodeException::class.java)
-        doReturn(callStub).`when`(webServiceStub).confirmCode(eq(confirmationCode))
+        doReturn(callStub).`when`(webServiceSpy).confirmCode(eq(confirmationCode))
         doReturn(responseStub).`when`(callStub).execute()
         doReturn(401).`when`(responseStub).code()
 
