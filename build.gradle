@@ -20,3 +20,6 @@ apply from: 'dependencies.gradle'
 apply from: 'publish.gradle'
 apply from: 'tasks.gradle'
 apply from: 'jacoco.gradle'
+
+group = gradle.ext.group
+version = gradle.ext.version
