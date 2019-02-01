@@ -11,7 +11,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit.SECONDS
 
 class RetrofitFactory(
-    private val propertyLoader: PropertyLoader = PropertyLoader(),
+    private val propertyLoader: PropertyLoader = PropertyLoader,
     private val builder: Builder = Builder(),
     private val okHttpClient: OkHttpClient = OkHttpClient()
 ) {

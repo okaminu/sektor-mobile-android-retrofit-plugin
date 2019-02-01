@@ -14,13 +14,13 @@ class IdentityConfirmationRetrofitAdapter(
     override fun requestCode(mobileNumber: String) {
         val response = webService.requestCode(mobileNumber).execute()
         if (response.code() == 404)
-            throw CollaboratorNotFoundException()
+            throw CollaboratorNotFoundException
     }
 
     override fun confirmCode(confirmationCode: String): String {
         val response = webService.confirmCode(confirmationCode).execute()
         if (response.code() == 401)
-            throw IncorrectConfirmationCodeException()
+            throw IncorrectConfirmationCodeException
         return response.body()
     }
 
