@@ -7,7 +7,7 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
-interface WorkLogWebService {
+interface WorklogWebService {
 
     @GET("/worklog/collaborator/interval-ids")
     fun getIntervalIdsByCollaborator(): Call<Collection<String>>
@@ -18,9 +18,6 @@ interface WorkLogWebService {
     @GET("/worklog/has-work-started")
     fun hasWorkStarted(): Call<Boolean>
 
-    @GET("/worklog/interval/{intervalId}/description")
-    fun getDescription(@Path("intervalId") intervalId: String): Call<ResponseBody>
-
     @GET("/worklog/interval/{intervalId}/endpoints")
     fun getIntervalEndpoints(@Path("intervalId") intervalId: String): Call<WorkLogIntervalEndpoints>
 
@@ -29,11 +26,5 @@ interface WorkLogWebService {
 
     @POST("/worklog/log-by-location")
     fun logByLocation(@Body gpsCoordinates: GpsCoordinates): Call<Void>
-
-    @POST("/worklog/interval/{intervalId}/update-description")
-    fun updateDescription(
-        @Path("intervalId") intervalId: String,
-        @Body descriptionBody: RequestBody
-    ): Call<Void>
 
 }
