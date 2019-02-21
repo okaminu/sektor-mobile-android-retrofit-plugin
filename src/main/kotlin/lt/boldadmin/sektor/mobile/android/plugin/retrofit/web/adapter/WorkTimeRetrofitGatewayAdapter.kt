@@ -7,8 +7,7 @@ import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorkTimeWe
 
 class WorkTimeRetrofitGatewayAdapter(
     token: String,
-    private val webService: WorkTimeWebService = RetrofitFactory().create(
-            WorkTimeWebService::class.java, token)
+    private val webService: WorkTimeWebService = RetrofitFactory().create(WorkTimeWebService::class.java, token)
 ) : WorkTimeGateway {
 
     override fun getWorkTime(): WorkTime = webService.getWorkTime().execute().body()
