@@ -6,9 +6,7 @@ import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.WorklogRetrofitGatewayAdapter
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorklogWebService
 import okhttp3.MediaType
-import okhttp3.RequestBody
 import okhttp3.ResponseBody
-import okio.Buffer
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -81,20 +79,6 @@ class WorklogRetrofitGatewayAdapterTest {
         ).getIntervalEndpoints(intervalId)
 
         assertSame(workLogIntervalEndpointsDummy, workLogIntervalEndpoints)
-    }
-
-    @Test
-    fun `Retrieves work durations sum of several work logs`() {
-        val intervalIds = listOf("id1", "id2")
-        val expectedDurationsSum = 1000L
-        doReturn(callSpy).`when`(worklogWebServiceSpy).getDurationsSum("id1,id2")
-        doReturn(Response.success(expectedDurationsSum)).`when`(callSpy).execute()
-
-        val actualDurationsSum = WorklogRetrofitGatewayAdapter(
-            "token", worklogWebServiceSpy
-        ).getDurationsSum(intervalIds)
-
-        assertEquals(expectedDurationsSum, actualDurationsSum)
     }
 
     @Test
