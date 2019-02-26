@@ -2,10 +2,12 @@ package lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service
 
 import lt.boldadmin.sektor.mobile.android.api.type.entity.WorkLogIntervalEndpoints
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
-import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface WorklogWebService {
 
@@ -20,9 +22,6 @@ interface WorklogWebService {
 
     @GET("/worklog/interval/{intervalId}/endpoints")
     fun getIntervalEndpoints(@Path("intervalId") intervalId: String): Call<WorkLogIntervalEndpoints>
-
-    @GET("/worklog/interval/{intervalIds}/durations-sum")
-    fun getDurationsSum(@Path("intervalIds") intervalIds: String): Call<Long>
 
     @POST("/worklog/log-by-location")
     fun logByLocation(@Body gpsCoordinates: GpsCoordinates): Call<Void>

@@ -22,9 +22,6 @@ class WorklogRetrofitGatewayAdapter(
     override fun getIntervalEndpoints(intervalId: String): WorkLogIntervalEndpoints =
         webService.getIntervalEndpoints(intervalId).execute().body()
 
-    override fun getDurationsSum(intervalIds: Collection<String>): Long =
-        webService.getDurationsSum(intervalIds.joinToString(",")).execute().body()
-
     override fun logByLocation(gpsCoordinates: GpsCoordinates) {
         webService.logByLocation(gpsCoordinates).execute()
     }
