@@ -21,7 +21,7 @@ class IdentityConfirmationRetrofitAdapter(
         val response = webService.confirmCode(confirmationCode).execute()
         if (response.code() == 401)
             throw IncorrectConfirmationCodeException
-        return response.body()
+        return response.body()!!
     }
 
 }

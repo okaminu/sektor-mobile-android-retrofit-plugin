@@ -10,5 +10,5 @@ class WorkTimeRetrofitGatewayAdapter(
     private val webService: WorkTimeWebService = RetrofitFactory().create(WorkTimeWebService::class.java, token)
 ) : WorkTimeGateway {
 
-    override fun getWorkTime(): WorkTime = webService.getWorkTime().execute().body()
+    override fun getWorkTime(): WorkTime = webService.getWorkTime().execute().body()!!
 }

@@ -1,6 +1,6 @@
 package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.adapter
 
-import com.nhaarman.mockito_kotlin.doReturn
+import com.nhaarman.mockitokotlin2.doReturn
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.ConnectionStatusRetrofitGatewayAdapter
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.ConnectionStatusWebService
 import org.junit.Assert.assertEquals

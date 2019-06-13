@@ -12,15 +12,15 @@ class WorklogRetrofitGatewayAdapter(
 ): WorklogGateway {
 
     override fun getIntervalIdsByCollaborator(): Collection<String> =
-        webService.getIntervalIdsByCollaborator().execute().body()
+        webService.getIntervalIdsByCollaborator().execute().body()!!
 
     override fun getProjectNameOfStartedWork(): String =
-        webService.getProjectNameOfStartedWork().execute().body().string()
+        webService.getProjectNameOfStartedWork().execute().body()!!.string()
 
-    override fun hasWorkStarted(): Boolean = webService.hasWorkStarted().execute().body()
+    override fun hasWorkStarted(): Boolean = webService.hasWorkStarted().execute().body()!!
 
     override fun getIntervalEndpoints(intervalId: String): WorkLogIntervalEndpoints =
-        webService.getIntervalEndpoints(intervalId).execute().body()
+        webService.getIntervalEndpoints(intervalId).execute().body()!!
 
     override fun logByLocation(gpsCoordinates: GpsCoordinates) {
         webService.logByLocation(gpsCoordinates).execute()

@@ -11,7 +11,7 @@ jacocoTestReport {
     }
 
     afterEvaluate {
-        classDirectories = debugTree
+        getClassDirectories().from(debugTree)
     }
 }
 
@@ -26,7 +26,7 @@ jacocoTestCoverageVerification {
         }
 
         afterEvaluate {
-            classDirectories = debugTree
+            getClassDirectories().from(debugTree)
         }
     }
 }

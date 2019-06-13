@@ -1,6 +1,6 @@
 package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.factory
 
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockitokotlin2.*
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.PropertyLoader
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.factory.RetrofitFactory
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.interceptor.AuthenticationInterceptor
