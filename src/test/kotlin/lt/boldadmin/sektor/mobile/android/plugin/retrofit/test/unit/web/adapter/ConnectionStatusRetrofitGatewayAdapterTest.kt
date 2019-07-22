@@ -11,7 +11,6 @@ import org.mockito.junit.MockitoJUnitRunner
 import retrofit2.Call
 import retrofit2.Response
 
-
 @RunWith(MockitoJUnitRunner::class)
 class ConnectionStatusRetrofitGatewayAdapterTest {
 
