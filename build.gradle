@@ -21,3 +21,9 @@ apply from: 'publish.gradle'
 apply from: 'tasks.gradle'
 apply from: 'jacoco.gradle'
 
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}

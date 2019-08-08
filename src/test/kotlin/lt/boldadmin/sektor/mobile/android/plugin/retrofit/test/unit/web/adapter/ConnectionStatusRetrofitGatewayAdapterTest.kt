@@ -3,16 +3,16 @@ package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.adapter
 import com.nhaarman.mockitokotlin2.doReturn
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.ConnectionStatusRetrofitGatewayAdapter
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.ConnectionStatusWebService
-import org.junit.Assert.assertEquals
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.junit.jupiter.MockitoExtension
 import retrofit2.Call
 import retrofit2.Response
 
 
-@RunWith(MockitoJUnitRunner::class)
+@ExtendWith(MockitoExtension::class)
 class ConnectionStatusRetrofitGatewayAdapterTest {
 
     @Mock

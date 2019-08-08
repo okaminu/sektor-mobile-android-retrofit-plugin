@@ -7,15 +7,15 @@ import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.WorklogRet
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorklogWebService
 import okhttp3.MediaType
 import okhttp3.ResponseBody
-import org.junit.Assert.*
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.junit.jupiter.MockitoExtension
 import retrofit2.Call
 import retrofit2.Response
 
-@RunWith(MockitoJUnitRunner::class)
+@ExtendWith(MockitoExtension::class)
 class WorklogRetrofitGatewayAdapterTest {
 
     @Mock
