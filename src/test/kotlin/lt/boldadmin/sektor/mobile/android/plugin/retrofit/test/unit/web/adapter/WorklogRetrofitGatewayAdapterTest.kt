@@ -1,8 +1,8 @@
 package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.adapter
 
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockito_kotlin.doReturn
+import com.nhaarman.mockito_kotlin.mock
 import lt.boldadmin.sektor.mobile.android.api.type.entity.WorkLogIntervalEndpoints
-import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.WorklogRetrofitGatewayAdapter
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorklogWebService
 import okhttp3.MediaType
@@ -23,9 +23,6 @@ class WorklogRetrofitGatewayAdapterTest {
 
     @Mock
     private lateinit var callSpy: Call<Void>
-
-    @Mock
-    private lateinit var responseDummy: Response<Void>
 
     @Test
     fun `Retrieves work log interval ids`() {
@@ -79,19 +76,5 @@ class WorklogRetrofitGatewayAdapterTest {
         ).getIntervalEndpoints(intervalId)
 
         assertSame(workLogIntervalEndpointsDummy, workLogIntervalEndpoints)
-    }
-
-    @Test
-    fun `Logs work by location using Retrofit`() {
-        val locationMock = GpsCoordinates(15.0, 20.0)
-        doReturn(callSpy).`when`(worklogWebServiceSpy).logByLocation(eq(locationMock))
-        doReturn(responseDummy).`when`(callSpy).execute()
-
-        WorklogRetrofitGatewayAdapter(
-            "token", worklogWebServiceSpy
-        ).logByLocation(locationMock)
-
-        verify(worklogWebServiceSpy).logByLocation(same(locationMock))
-        verify(callSpy).execute()
     }
 }

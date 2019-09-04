@@ -2,7 +2,6 @@ package lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter
 
 import lt.boldadmin.sektor.mobile.android.api.gateway.WorklogGateway
 import lt.boldadmin.sektor.mobile.android.api.type.entity.WorkLogIntervalEndpoints
-import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.factory.RetrofitFactory
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorklogWebService
 
@@ -21,8 +20,4 @@ class WorklogRetrofitGatewayAdapter(
 
     override fun getIntervalEndpoints(intervalId: String): WorkLogIntervalEndpoints =
         webService.getIntervalEndpoints(intervalId).execute().body()
-
-    override fun logByLocation(gpsCoordinates: GpsCoordinates) {
-        webService.logByLocation(gpsCoordinates).execute()
-    }
 }
