@@ -17,7 +17,6 @@ import retrofit2.Retrofit
 import retrofit2.Retrofit.Builder
 import java.util.*
 
-
 @RunWith(MockitoJUnitRunner::class)
 class RetrofitFactoryTest {
 
