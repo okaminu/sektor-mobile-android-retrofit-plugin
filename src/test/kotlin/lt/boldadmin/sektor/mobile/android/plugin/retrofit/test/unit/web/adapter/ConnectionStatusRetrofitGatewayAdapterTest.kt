@@ -11,7 +11,6 @@ import org.mockito.junit.jupiter.MockitoExtension
 import retrofit2.Call
 import retrofit2.Response
 
-
 @ExtendWith(MockitoExtension::class)
 class ConnectionStatusRetrofitGatewayAdapterTest {
 

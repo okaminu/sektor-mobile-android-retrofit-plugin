@@ -17,7 +17,6 @@ import retrofit2.Retrofit
 import retrofit2.Retrofit.Builder
 import java.util.*
 
-
 @ExtendWith(MockitoExtension::class)
 class RetrofitFactoryTest {
 
