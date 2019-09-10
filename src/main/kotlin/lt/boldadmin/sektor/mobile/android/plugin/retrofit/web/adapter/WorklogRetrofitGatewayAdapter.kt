@@ -11,9 +11,9 @@ class WorklogRetrofitGatewayAdapter(
 ): WorklogGateway {
 
     override fun getProjectNameOfStartedWork(): String =
-        webService.getProjectNameOfStartedWork().execute().body().string()
+        webService.getProjectNameOfStartedWork().execute().body()!!.string()
 
-    override fun hasWorkStarted(): Boolean = webService.hasWorkStarted().execute().body()
+    override fun hasWorkStarted(): Boolean = webService.hasWorkStarted().execute().body()!!
 
     override fun logByLocation(gpsCoordinates: GpsCoordinates) {
         webService.logByLocation(gpsCoordinates).execute()

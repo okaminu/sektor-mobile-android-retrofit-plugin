@@ -1,21 +1,21 @@
 package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.adapter
 
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockitokotlin2.*
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.WorklogRetrofitGatewayAdapter
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorklogWebService
 import okhttp3.MediaType
 import okhttp3.ResponseBody
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.junit.jupiter.MockitoExtension
 import retrofit2.Call
 import retrofit2.Response
 
-@RunWith(MockitoJUnitRunner::class)
+@ExtendWith(MockitoExtension::class)
 class WorklogRetrofitGatewayAdapterTest {
 
     @Mock

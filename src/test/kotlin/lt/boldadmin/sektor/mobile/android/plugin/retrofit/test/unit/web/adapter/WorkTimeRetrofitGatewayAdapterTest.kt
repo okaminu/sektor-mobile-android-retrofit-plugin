@@ -1,18 +1,18 @@
 package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.adapter
 
-import com.nhaarman.mockito_kotlin.doReturn
+import com.nhaarman.mockitokotlin2.doReturn
 import lt.boldadmin.sektor.mobile.android.api.valueobject.WorkTime
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.WorkTimeRetrofitGatewayAdapter
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorkTimeWebService
-import org.junit.Assert.assertEquals
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.junit.jupiter.MockitoExtension
 import retrofit2.Call
 import retrofit2.Response
 
-@RunWith(MockitoJUnitRunner::class)
+@ExtendWith(MockitoExtension::class)
 class WorkTimeRetrofitGatewayAdapterTest {
 
     @Mock
