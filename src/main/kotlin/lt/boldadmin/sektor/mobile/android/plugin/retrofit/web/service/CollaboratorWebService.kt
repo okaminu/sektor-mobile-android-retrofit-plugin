@@ -14,5 +14,4 @@ interface CollaboratorWebService {
 
     @GET("/collaborator/workTime")
     fun getWorkTime(): Call<WorkTime>
-
 }

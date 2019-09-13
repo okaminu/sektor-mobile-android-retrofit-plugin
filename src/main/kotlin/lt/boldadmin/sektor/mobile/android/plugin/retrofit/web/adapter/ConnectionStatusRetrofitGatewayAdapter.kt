@@ -9,6 +9,6 @@ class ConnectionStatusRetrofitGatewayAdapter(
         RetrofitFactory().create(ConnectionStatusWebService::class.java)
 ): ConnectionStatusGateway {
 
-    override fun isHealthy(): Boolean = connectionStatusService.isHealthy().execute().body()
+    override fun isHealthy(): Boolean = connectionStatusService.isHealthy().execute().body()!!
 
 }

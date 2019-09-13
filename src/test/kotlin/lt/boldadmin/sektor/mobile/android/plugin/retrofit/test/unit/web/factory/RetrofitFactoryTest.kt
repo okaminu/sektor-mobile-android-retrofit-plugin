@@ -1,24 +1,23 @@
 package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.factory
 
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockitokotlin2.*
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.PropertyLoader
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.factory.RetrofitFactory
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.interceptor.AuthenticationInterceptor
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.CollaboratorWebService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import org.junit.Assert.assertNotNull
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.junit.jupiter.MockitoExtension
 import retrofit2.Retrofit
 import retrofit2.Retrofit.Builder
 import java.util.*
 
-
-@RunWith(MockitoJUnitRunner::class)
+@ExtendWith(MockitoExtension::class)
 class RetrofitFactoryTest {
 
     @Mock
@@ -35,7 +34,7 @@ class RetrofitFactoryTest {
 
     private lateinit var retrofitFactory: RetrofitFactory
 
-    @Before
+    @BeforeEach
     fun `Set up`() {
         mockOkHttpClientBuilder()
         retrofitFactory = RetrofitFactory(propertyLoaderSpy, retrofitBuilderSpy, okHttpClientSpy)
@@ -43,7 +42,6 @@ class RetrofitFactoryTest {
 
     @Test
     fun `Gets Retrofit service without token`() {
-        mockOkHttpClientBuilder()
         mockRetrofitBuilder()
 
         retrofitFactory.create(CollaboratorWebService::class.java)
@@ -62,7 +60,6 @@ class RetrofitFactoryTest {
     fun `Gets Retrofit service with token`() {
         val interceptorsSpy: ArrayList<Interceptor> = mock()
         mockRetrofitBuilder()
-        mockOkHttpClientBuilder()
         doReturn(interceptorsSpy).`when`(okHttpBuilderSpy).interceptors()
         doReturn(true).`when`(interceptorsSpy).add(any())
 

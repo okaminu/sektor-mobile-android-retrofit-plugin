@@ -15,6 +15,5 @@ class CollaboratorRetrofitGatewayAdapter(
         webService.updateLocation(gpsCoordinates).execute()
     }
 
-    override fun getWorkTime(): WorkTime = webService.getWorkTime().execute().body()
-
+    override fun getWorkTime(): WorkTime = webService.getWorkTime().execute().body()!!
 }

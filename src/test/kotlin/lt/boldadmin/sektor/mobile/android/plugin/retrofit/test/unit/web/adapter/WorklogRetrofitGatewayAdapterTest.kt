@@ -1,21 +1,20 @@
 package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.adapter
 
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
-import lt.boldadmin.sektor.mobile.android.api.type.entity.WorkLogIntervalEndpoints
+import com.nhaarman.mockitokotlin2.doReturn
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.WorklogRetrofitGatewayAdapter
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorklogWebService
 import okhttp3.MediaType
 import okhttp3.ResponseBody
-import org.junit.Assert.*
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.junit.jupiter.MockitoExtension
 import retrofit2.Call
 import retrofit2.Response
 
-@RunWith(MockitoJUnitRunner::class)
+@ExtendWith(MockitoExtension::class)
 class WorklogRetrofitGatewayAdapterTest {
 
     @Mock
@@ -23,19 +22,6 @@ class WorklogRetrofitGatewayAdapterTest {
 
     @Mock
     private lateinit var callSpy: Call<Void>
-
-    @Test
-    fun `Retrieves work log interval ids`() {
-        val expectedIntervalIds = listOf("id1")
-        doReturn(callSpy).`when`(worklogWebServiceSpy).getIntervalIdsByCollaborator()
-        doReturn(Response.success(expectedIntervalIds)).`when`(callSpy).execute()
-
-        val actualIntervalIds = WorklogRetrofitGatewayAdapter(
-            "token", worklogWebServiceSpy
-        ).getIntervalIdsByCollaborator()
-
-        assertEquals(expectedIntervalIds, actualIntervalIds)
-    }
 
     @Test
     fun `Retrieves project name of started work`() {
@@ -62,19 +48,5 @@ class WorklogRetrofitGatewayAdapterTest {
         ).hasWorkStarted()
 
         assertTrue(workStatus)
-    }
-
-    @Test
-    fun `Retrieves work log interval endpoints`() {
-        val intervalId = "id"
-        val workLogIntervalEndpointsDummy = mock<WorkLogIntervalEndpoints>()
-        doReturn(callSpy).`when`(worklogWebServiceSpy).getIntervalEndpoints(intervalId)
-        doReturn(Response.success(workLogIntervalEndpointsDummy)).`when`(callSpy).execute()
-
-        val workLogIntervalEndpoints = WorklogRetrofitGatewayAdapter(
-            "token", worklogWebServiceSpy
-        ).getIntervalEndpoints(intervalId)
-
-        assertSame(workLogIntervalEndpointsDummy, workLogIntervalEndpoints)
     }
 }
