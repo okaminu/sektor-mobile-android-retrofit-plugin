@@ -11,8 +11,8 @@ class CollaboratorRetrofitGatewayAdapter(
     private val webService: CollaboratorWebService = RetrofitFactory().create(CollaboratorWebService::class.java, token)
 ): CollaboratorGateway {
 
-    override fun updateLocation(gpsCoordinates: GpsCoordinates) {
-        webService.updateLocation(gpsCoordinates).execute()
+    override fun updateCoordinates(gpsCoordinates: GpsCoordinates) {
+        webService.updateCoordinates(gpsCoordinates).execute()
     }
 
     override fun getWorkTime(): WorkTime = webService.getWorkTime().execute().body()!!

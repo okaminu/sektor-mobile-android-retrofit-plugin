@@ -10,7 +10,7 @@ import retrofit2.http.POST
 interface CollaboratorWebService {
 
     @POST("/collaborator/location/coordinates")
-    fun updateLocation(@Body gpsCoordinates: GpsCoordinates): Call<Void>
+    fun updateCoordinates(@Body gpsCoordinates: GpsCoordinates): Call<Void>
 
     @GET("/collaborator/workTime")
     fun getWorkTime(): Call<WorkTime>

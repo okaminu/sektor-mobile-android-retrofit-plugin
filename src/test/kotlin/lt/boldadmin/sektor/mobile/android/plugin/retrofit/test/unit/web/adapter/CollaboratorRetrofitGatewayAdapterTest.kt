@@ -34,15 +34,15 @@ class CollaboratorRetrofitGatewayAdapterTest {
     }
 
     @Test
-    fun `Updates location using Retrofit`() {
+    fun `Updates coordinates using Retrofit`() {
         val responseDummy: Response<Void> = mock()
         val coordinates = GpsCoordinates(15.0, 20.0)
-        doReturn(callSpy).`when`(collaboratorWebServiceSpy).updateLocation(coordinates)
+        doReturn(callSpy).`when`(collaboratorWebServiceSpy).updateCoordinates(coordinates)
         doReturn(responseDummy).`when`(callSpy).execute()
 
-        adapter.updateLocation(coordinates)
+        adapter.updateCoordinates(coordinates)
 
-        verify(collaboratorWebServiceSpy).updateLocation(same(coordinates))
+        verify(collaboratorWebServiceSpy).updateCoordinates(same(coordinates))
         verify(callSpy).execute()
     }
 
