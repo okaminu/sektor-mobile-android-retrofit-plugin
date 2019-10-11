@@ -1,7 +1,7 @@
 package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.adapter
 
 import com.nhaarman.mockitokotlin2.doReturn
-import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.same
 import com.nhaarman.mockitokotlin2.verify
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
@@ -26,37 +26,34 @@ class CollaboratorRetrofitGatewayAdapterTest {
     @Mock
     private lateinit var callSpy: Call<Void>
 
-    @Mock
-    private lateinit var responseDummy: Response<Void>
-
     private lateinit var adapter: CollaboratorRetrofitGatewayAdapter
 
     @BeforeEach
-    fun setUp() {
+    fun `Set up`() {
         adapter = CollaboratorRetrofitGatewayAdapter("token", collaboratorWebServiceSpy)
     }
 
     @Test
     fun `Updates location using Retrofit`() {
-        val locationMock = GpsCoordinates(15.0, 20.0)
-        doReturn(callSpy).`when`(collaboratorWebServiceSpy).updateLocation(eq(locationMock))
+        val responseDummy: Response<Void> = mock()
+        val coordinates = GpsCoordinates(15.0, 20.0)
+        doReturn(callSpy).`when`(collaboratorWebServiceSpy).updateLocation(coordinates)
         doReturn(responseDummy).`when`(callSpy).execute()
 
-        adapter.updateLocation(locationMock)
+        adapter.updateLocation(coordinates)
 
-        verify(collaboratorWebServiceSpy).updateLocation(same(locationMock))
+        verify(collaboratorWebServiceSpy).updateLocation(same(coordinates))
         verify(callSpy).execute()
     }
 
     @Test
     fun `Gets work time`() {
-        val workTimeMock = WorkTime()
-        val responseMock = Response.success(WorkTime())
+        val expectedWorkTime = WorkTime()
         doReturn(callSpy).`when`(collaboratorWebServiceSpy).getWorkTime()
-        doReturn(responseMock).`when`(callSpy).execute()
+        doReturn(Response.success(expectedWorkTime)).`when`(callSpy).execute()
 
-        val workTime = adapter.getWorkTime()
+        val actualWorkTime = adapter.getWorkTime()
 
-        assertEquals(workTimeMock, workTime)
+        assertEquals(expectedWorkTime, actualWorkTime)
     }
 }
