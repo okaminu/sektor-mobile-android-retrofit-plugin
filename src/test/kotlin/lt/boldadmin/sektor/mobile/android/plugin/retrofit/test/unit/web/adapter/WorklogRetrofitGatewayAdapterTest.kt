@@ -1,7 +1,6 @@
 package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.adapter
 
-import com.nhaarman.mockitokotlin2.*
-import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
+import com.nhaarman.mockitokotlin2.doReturn
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.WorklogRetrofitGatewayAdapter
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorklogWebService
 import okhttp3.MediaType
@@ -23,9 +22,6 @@ class WorklogRetrofitGatewayAdapterTest {
 
     @Mock
     private lateinit var callSpy: Call<Void>
-
-    @Mock
-    private lateinit var responseDummy: Response<Void>
 
     @Test
     fun `Retrieves project name of started work`() {
@@ -52,19 +48,5 @@ class WorklogRetrofitGatewayAdapterTest {
         ).hasWorkStarted()
 
         assertTrue(workStatus)
-    }
-
-    @Test
-    fun `Logs work by location using Retrofit`() {
-        val locationMock = GpsCoordinates(15.0, 20.0)
-        doReturn(callSpy).`when`(worklogWebServiceSpy).logByLocation(eq(locationMock))
-        doReturn(responseDummy).`when`(callSpy).execute()
-
-        WorklogRetrofitGatewayAdapter(
-            "token", worklogWebServiceSpy
-        ).logByLocation(locationMock)
-
-        verify(worklogWebServiceSpy).logByLocation(same(locationMock))
-        verify(callSpy).execute()
     }
 }

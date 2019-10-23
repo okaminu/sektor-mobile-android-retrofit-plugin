@@ -4,7 +4,7 @@ import com.nhaarman.mockitokotlin2.*
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.PropertyLoader
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.factory.RetrofitFactory
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.interceptor.AuthenticationInterceptor
-import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.WorkTimeWebService
+import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.CollaboratorWebService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -44,7 +44,7 @@ class RetrofitFactoryTest {
     fun `Gets Retrofit service without token`() {
         mockRetrofitBuilder()
 
-        retrofitFactory.create(WorkTimeWebService::class.java)
+        retrofitFactory.create(CollaboratorWebService::class.java)
 
         verifyOkHttpBuilderMock()
         verify(okHttpClientSpy, never()).interceptors()
@@ -63,7 +63,7 @@ class RetrofitFactoryTest {
         doReturn(interceptorsSpy).`when`(okHttpBuilderSpy).interceptors()
         doReturn(true).`when`(interceptorsSpy).add(any())
 
-        retrofitFactory.create(WorkTimeWebService::class.java, "token")
+        retrofitFactory.create(CollaboratorWebService::class.java, "token")
 
         verifyOkHttpBuilderMock()
         verify(okHttpBuilderSpy).interceptors()

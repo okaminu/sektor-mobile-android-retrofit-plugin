@@ -1,6 +1,9 @@
 package lt.boldadmin.sektor.mobile.android.plugin.retrofit.test.unit.web.adapter
 
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.same
+import com.nhaarman.mockitokotlin2.verify
 import lt.boldadmin.sektor.mobile.android.api.exception.CollaboratorNotFoundException
 import lt.boldadmin.sektor.mobile.android.api.exception.IncorrectConfirmationCodeException
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.IdentityConfirmationRetrofitAdapter
