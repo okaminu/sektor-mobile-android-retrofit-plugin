@@ -4,8 +4,8 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.same
 import com.nhaarman.mockitokotlin2.verify
+import lt.boldadmin.sektor.mobile.android.api.valueobject.DayTime
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
-import lt.boldadmin.sektor.mobile.android.api.valueobject.WorkTime
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.CollaboratorRetrofitGatewayAdapter
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.CollaboratorWebService
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -48,7 +48,7 @@ class CollaboratorRetrofitGatewayAdapterTest {
 
     @Test
     fun `Gets work time`() {
-        val expectedWorkTime = WorkTime()
+        val expectedWorkTime = sortedSetOf(DayTime())
         doReturn(callSpy).`when`(collaboratorWebServiceSpy).getWorkTime()
         doReturn(Response.success(expectedWorkTime)).`when`(callSpy).execute()
 
