@@ -16,5 +16,5 @@ class CollaboratorRetrofitGatewayAdapter(
         webService.updateCoordinates(gpsCoordinates).execute()
     }
 
-    override fun getWorkTime(): SortedSet<Day> = webService.getWorkTime().execute().body()!!
+    override fun getWorkWeek(): SortedSet<Day> = webService.getWorkWeek().execute().body()!!
 }

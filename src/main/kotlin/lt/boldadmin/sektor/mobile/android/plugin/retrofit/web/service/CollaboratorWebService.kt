@@ -13,6 +13,6 @@ interface CollaboratorWebService {
     @POST("/collaborator/location/coordinates")
     fun updateCoordinates(@Body gpsCoordinates: GpsCoordinates): Call<Void>
 
-    @GET("/collaborator/workTime")
-    fun getWorkTime(): Call<SortedSet<Day>>
+    @GET("/collaborator/work-week")
+    fun getWorkWeek(): Call<SortedSet<Day>>
 }

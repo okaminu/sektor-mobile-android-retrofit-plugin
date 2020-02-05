@@ -49,10 +49,10 @@ class CollaboratorRetrofitGatewayAdapterTest {
     @Test
     fun `Gets work time`() {
         val expectedWorkTime = sortedSetOf(Day())
-        doReturn(callSpy).`when`(collaboratorWebServiceSpy).getWorkTime()
+        doReturn(callSpy).`when`(collaboratorWebServiceSpy).getWorkWeek()
         doReturn(Response.success(expectedWorkTime)).`when`(callSpy).execute()
 
-        val actualWorkTime = adapter.getWorkTime()
+        val actualWorkTime = adapter.getWorkWeek()
 
         assertEquals(expectedWorkTime, actualWorkTime)
     }
