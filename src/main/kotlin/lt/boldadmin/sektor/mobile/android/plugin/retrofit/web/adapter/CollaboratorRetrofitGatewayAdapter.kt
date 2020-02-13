@@ -1,7 +1,7 @@
 package lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter
 
 import lt.boldadmin.sektor.mobile.android.api.gateway.CollaboratorGateway
-import lt.boldadmin.sektor.mobile.android.api.valueobject.Day
+import lt.boldadmin.sektor.mobile.android.api.valueobject.DayMinuteInterval
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.factory.RetrofitFactory
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.CollaboratorWebService
@@ -16,5 +16,5 @@ class CollaboratorRetrofitGatewayAdapter(
         webService.updateCoordinates(gpsCoordinates).execute()
     }
 
-    override fun getWorkWeek(): SortedSet<Day> = webService.getWorkWeek().execute().body()!!
+    override fun getWorkWeek(): SortedSet<DayMinuteInterval> = webService.getWorkWeek().execute().body()!!
 }
