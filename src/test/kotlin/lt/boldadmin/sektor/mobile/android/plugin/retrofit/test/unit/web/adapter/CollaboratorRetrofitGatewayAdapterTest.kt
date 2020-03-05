@@ -4,8 +4,10 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.same
 import com.nhaarman.mockitokotlin2.verify
+import lt.boldadmin.sektor.mobile.android.api.valueobject.DayMinuteInterval
+import lt.boldadmin.sektor.mobile.android.api.valueobject.DayOfWeek.TUESDAY
 import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
-import lt.boldadmin.sektor.mobile.android.api.valueobject.WorkTime
+import lt.boldadmin.sektor.mobile.android.api.valueobject.MinuteInterval
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.CollaboratorRetrofitGatewayAdapter
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.CollaboratorWebService
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -47,13 +49,13 @@ class CollaboratorRetrofitGatewayAdapterTest {
     }
 
     @Test
-    fun `Gets work time`() {
-        val expectedWorkTime = WorkTime()
-        doReturn(callSpy).`when`(collaboratorWebServiceSpy).getWorkTime()
-        doReturn(Response.success(expectedWorkTime)).`when`(callSpy).execute()
+    fun `Gets work week`() {
+        val expectedWorkWeek = sortedSetOf(DayMinuteInterval(TUESDAY, MinuteInterval(10, 20), false))
+        doReturn(callSpy).`when`(collaboratorWebServiceSpy).getWorkWeek()
+        doReturn(Response.success(expectedWorkWeek)).`when`(callSpy).execute()
 
-        val actualWorkTime = adapter.getWorkTime()
+        val actualWorkWeek = adapter.getWorkWeek()
 
-        assertEquals(expectedWorkTime, actualWorkTime)
+        assertEquals(expectedWorkWeek, actualWorkWeek)
     }
 }
