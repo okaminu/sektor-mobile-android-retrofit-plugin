@@ -4,10 +4,10 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.same
 import com.nhaarman.mockitokotlin2.verify
-import lt.boldadmin.sektor.mobile.android.api.valueobject.DayMinuteInterval
-import lt.boldadmin.sektor.mobile.android.api.valueobject.DayOfWeek.TUESDAY
-import lt.boldadmin.sektor.mobile.android.api.valueobject.GpsCoordinates
-import lt.boldadmin.sektor.mobile.android.api.valueobject.MinuteInterval
+import lt.boldadmin.sektor.mobile.android.api.type.valueobject.Coordinates
+import lt.boldadmin.sektor.mobile.android.api.type.valueobject.DayMinuteInterval
+import lt.boldadmin.sektor.mobile.android.api.type.valueobject.DayOfWeek
+import lt.boldadmin.sektor.mobile.android.api.type.valueobject.MinuteInterval
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.adapter.CollaboratorRetrofitGatewayAdapter
 import lt.boldadmin.sektor.mobile.android.plugin.retrofit.web.service.CollaboratorWebService
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -38,7 +38,7 @@ class CollaboratorRetrofitGatewayAdapterTest {
     @Test
     fun `Updates coordinates using Retrofit`() {
         val responseDummy: Response<Void> = mock()
-        val coordinates = GpsCoordinates(15.0, 20.0)
+        val coordinates = Coordinates(15.0, 20.0)
         doReturn(callSpy).`when`(collaboratorWebServiceSpy).updateCoordinates(coordinates)
         doReturn(responseDummy).`when`(callSpy).execute()
 
@@ -50,7 +50,7 @@ class CollaboratorRetrofitGatewayAdapterTest {
 
     @Test
     fun `Gets work week`() {
-        val expectedWorkWeek = sortedSetOf(DayMinuteInterval(TUESDAY, MinuteInterval(10, 20), false))
+        val expectedWorkWeek = sortedSetOf(DayMinuteInterval(DayOfWeek.TUESDAY, MinuteInterval(10, 20), false))
         doReturn(callSpy).`when`(collaboratorWebServiceSpy).getWorkWeek()
         doReturn(Response.success(expectedWorkWeek)).`when`(callSpy).execute()
 
